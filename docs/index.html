@@ -11,35 +11,13 @@
 </head>
 <body>
   <div id="app">
-    <!-- Pantalla de acceso -->
-    <section id="login" class="screen hidden">
-      <div class="login-card">
-        <h1>Ofertas<span>·BCN</span></h1>
-        <p class="muted">Introduce tu email y te llegará un enlace para entrar.</p>
-        <form id="login-form">
-          <input id="login-email" type="email" autocomplete="email" placeholder="tu@email.com" required />
-          <button type="submit" class="btn primary">Enviarme el enlace</button>
-        </form>
-        <p id="login-msg" class="muted small"></p>
-      </div>
-    </section>
-
-    <!-- Aviso de configuración -->
-    <section id="setup" class="screen hidden">
-      <div class="login-card">
-        <h1>Falta configurar</h1>
-        <p class="muted">La web no encuentra los datos de Supabase. Revisa el paso 7 de la guía
-          (secretos <code>SUPABASE_URL</code> y <code>SUPABASE_PUBLISHABLE_KEY</code>) y vuelve a publicar la web.</p>
-      </div>
-    </section>
-
     <!-- Aplicación -->
-    <section id="main" class="hidden">
+    <section id="main">
       <header class="topbar">
         <div class="brand">Ofertas<span>·BCN</span></div>
         <div class="top-actions">
           <button id="btn-refresh" class="icon-btn" title="Actualizar" aria-label="Actualizar">↻</button>
-          <button id="btn-logout" class="icon-btn text" title="Salir">Salir</button>
+          
         </div>
       </header>
 
@@ -66,6 +44,7 @@
       </div>
 
       <p id="summary-line" class="muted small pad"></p>
+      <p class="muted small pad">Tus marcas y notas se guardan en este dispositivo.</p>
       <ul id="list" class="list"></ul>
       <p id="empty" class="muted pad hidden">No hay ofertas con estos filtros.</p>
 
@@ -108,7 +87,6 @@
     </li>
   </template>
 
-  <script src="config.js"></script>
   <script type="module" src="app.js"></script>
 </body>
 </html>

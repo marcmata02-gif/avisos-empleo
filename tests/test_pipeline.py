@@ -42,6 +42,9 @@ class FakeStore:
     def cleanup(self):
         pass
 
+    def flush(self):
+        self.flushed = True
+
 
 SENT = []
 
@@ -83,11 +86,12 @@ def test_pipeline(monkeypatch):
     store = FakeStore()
     monkeypatch.setattr(S, "Storage", lambda: store)
     monkeypatch.setattr(N, "Telegram", FakeTelegram)
+    monkeypatch.setattr(N, "discover_chat_id", lambda token: "42")
     monkeypatch.setattr(M.adzuna, "fetch", fake_adzuna)
     monkeypatch.setattr(M.infojobs, "fetch", fake_infojobs)
     monkeypatch.setattr(M.ats, "fetch_company", lambda *a, **k: [])
     for k in ("ADZUNA_APP_ID", "ADZUNA_APP_KEY", "INFOJOBS_CLIENT_ID", "INFOJOBS_CLIENT_SECRET",
-              "TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID"):
+              "TELEGRAM_BOT_TOKEN"):
         monkeypatch.setenv(k, "x")
     monkeypatch.delenv("GMAIL_USER", raising=False)
     args = SimpleNamespace(prueba=False, fuente="", probar_telegram=False)
@@ -106,6 +110,7 @@ def test_pipeline(monkeypatch):
     assert by_title["Brand Manager"]["aviso"] == "solo_web"
     assert by_title["Social Media Junior"]["aviso"] == "omitido_antiguo"
     assert SENT == [merged[0]["title"]]
+    assert store.states["telegram"]["meta"]["telegram_chat_id"] == "42"   # chat detectado y recordado
 
     # Segunda revisión: no se repite ningún aviso
     SENT.clear()
@@ -114,3 +119,20 @@ def test_pipeline(monkeypatch):
     assert M.run(args) == 0
     assert SENT == []
     assert len([o for o in store.offers.values() if "Marketing Assistant" in o["title"]]) == 1
+
+
+def test_json_storage(tmp_path):
+    st = S.Storage(tmp_path / "datos", tmp_path / "docs")
+    st.upsert("offers", [{"id": "a", "title": "X", "passes": True, "first_seen": NOW.isoformat(),
+                          "last_seen": NOW.date().isoformat(), "aviso": None, "description": "d" * 9000},
+                         {"id": "b", "title": "Y", "passes": False, "discard_reason": "Prácticas / beca (intern)",
+                          "first_seen": NOW.isoformat(), "last_seen": NOW.date().isoformat()}])
+    st.save_source_state([{"source": "telegram", "meta": {"telegram_chat_id": "1"}}])
+    st.flush()
+    st2 = S.Storage(tmp_path / "datos", tmp_path / "docs")
+    assert set(st2.offers) == {"a", "b"} and len(st2.offers["a"]["description"]) == 4000
+    assert [o["id"] for o in st2.pending_notifications()] == ["a"]
+    import json
+    web = json.loads((tmp_path / "docs" / "ofertas.json").read_text())
+    assert {o["id"] for o in web} == {"a", "b"} and "description" not in web[0]
+    assert "telegram_chat_id" not in (tmp_path / "docs" / "estado.json").read_text()

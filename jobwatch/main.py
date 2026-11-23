@@ -130,7 +130,7 @@ def merge_row(existing: dict | None, raw: RawOffer, fid: str, now: datetime) -> 
     if raw.published_at and (not old_pub or raw.published_at < old_pub):
         row["published_at"] = iso(raw.published_at)
     row["first_seen"] = row.get("first_seen") or iso(now)
-    row["last_seen"] = iso(now)
+    row["last_seen"] = now.date().isoformat()   # solo la fecha: menos cambios en los archivos
     return row
 
 
@@ -162,16 +162,17 @@ def run(args) -> int:
     now = now_utc()
     dry = args.prueba
 
-    if args.probar_telegram:
-        from .notify import Telegram
-        Telegram().send_text("✅ <b>Bot de ofertas conectado.</b>\nA partir de ahora recibirás aquí las ofertas nuevas.")
-        log("Mensaje de prueba enviado.")
-        return 0
-
     store = None
-    if not dry:
+    if not dry or args.probar_telegram:
         from .storage import Storage
         store = Storage()
+
+    if args.probar_telegram:
+        tg = telegram_for(store)
+        tg.send_text("✅ <b>Bot de ofertas conectado.</b>\nA partir de ahora recibirás aquí las ofertas nuevas.")
+        store.flush()
+        log("Mensaje de prueba enviado.")
+        return 0
     states = store.source_states() if store else {}
     index = store.load_index() if store else {}
     url_to_id = {}
@@ -342,8 +343,6 @@ def run(args) -> int:
     # ---------------- Guardar
     assert store is not None
     store.upsert("offers", list(changed.values()))
-    if gmail:
-        gmail.commit()
 
     # ---------------- Avisar por Telegram
     sent = notify_pending(store, cfg, now)
@@ -366,7 +365,27 @@ def run(args) -> int:
                                       "last_error": "", "runs": int(cl.get("runs") or 0) + 1, "meta": {}}])
         except Exception as e:  # noqa: BLE001
             log(f"[limpieza] {e}")
+    store.flush()
+    if gmail:
+        gmail.commit()   # los emails se marcan como leídos solo después de guardar
     return 0
+
+
+def telegram_for(store):
+    """Crea el bot. Si no hay TELEGRAM_CHAT_ID, usa el chat que escribió al bot (y lo recuerda)."""
+    from .notify import Telegram, discover_chat_id
+    token = os.environ.get("TELEGRAM_BOT_TOKEN", "")
+    if not token:
+        raise RuntimeError("Falta el secreto TELEGRAM_BOT_TOKEN")
+    st = store.source_states().get("telegram") or {}
+    chat = os.environ.get("TELEGRAM_CHAT_ID") or (st.get("meta") or {}).get("telegram_chat_id")
+    if not chat:
+        chat = discover_chat_id(token)
+        if not chat:
+            raise RuntimeError("Escribe cualquier mensaje a tu bot en Telegram y vuelve a ejecutar.")
+        store.save_source_state([{"source": "telegram", "last_run": iso(now_utc()), "last_ok": iso(now_utc()),
+                                  "last_error": "", "runs": 1, "meta": {"telegram_chat_id": str(chat)}}])
+    return Telegram(token=token, chat_id=str(chat))
 
 
 def notify_pending(store, cfg: Config, now: datetime) -> int:
@@ -374,14 +393,15 @@ def notify_pending(store, cfg: Config, now: datetime) -> int:
     max_days = int(tcfg.get("max_dias_antiguedad", 7))
     no_send = set(tcfg.get("no_enviar_si_aviso") or [])
     max_n = int(tcfg.get("max_por_revision", 25))
-    token, chat = os.environ.get("TELEGRAM_BOT_TOKEN"), os.environ.get("TELEGRAM_CHAT_ID")
     pending = store.pending_notifications()
     if not pending:
         return 0
     tg = None
-    if token and chat:
-        from .notify import Telegram
-        tg = Telegram()
+    if os.environ.get("TELEGRAM_BOT_TOKEN"):
+        try:
+            tg = telegram_for(store)
+        except Exception as e:  # noqa: BLE001
+            log(f"[telegram] {e}")
     sent = 0
     for o in pending:
         date = parse_iso(o.get("published_at")) or parse_iso(o.get("first_seen")) or now

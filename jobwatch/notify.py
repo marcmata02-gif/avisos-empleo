@@ -47,6 +47,19 @@ class Telegram:
         time.sleep(1.1)  # Telegram permite ~1 mensaje/segundo por chat
 
 
+def discover_chat_id(token: str) -> str:
+    """Busca el chat de la última persona que escribió al bot."""
+    r = requests.get(API.format(token=token, method="getUpdates"), timeout=30).json()
+    if not r.get("ok"):
+        raise RuntimeError(f"Telegram: {r.get('description')} (¿token correcto?)")
+    for upd in reversed(r.get("result") or []):
+        msg = upd.get("message") or upd.get("edited_message") or {}
+        chat = msg.get("chat") or {}
+        if chat.get("type") == "private" and chat.get("id"):
+            return str(chat["id"])
+    return ""
+
+
 def _e(s) -> str:
     return html.escape(str(s or ""), quote=False)
 
