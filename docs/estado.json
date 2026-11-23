@@ -1,7 +1,7 @@
 {
  "config": {
   "last_error": "",
-  "last_run": "2026-11-23T18:50:39.569547+00:00",
+  "last_run": "2026-11-23T19:55:47.949885+00:00",
   "meta": {
    "areas": [
     "Trade Marketing",
@@ -79,135 +79,135 @@
  },
  "empresa:Almirall": {
   "last_error": "",
-  "last_run": "2026-11-23T18:50:39.569547+00:00",
+  "last_run": "2026-11-23T19:55:47.949885+00:00",
   "meta": {
    "ultimas_ofertas": 0
   }
  },
  "empresa:Charlotte Tilbury": {
   "last_error": "",
-  "last_run": "2026-11-23T18:50:39.569547+00:00",
+  "last_run": "2026-11-23T19:55:47.949885+00:00",
   "meta": {
-   "ultimas_ofertas": 223
+   "ultimas_ofertas": 221
   }
  },
  "empresa:Cocunat": {
   "last_error": "",
-  "last_run": "2026-11-23T18:50:39.569547+00:00",
+  "last_run": "2026-11-23T19:55:47.949885+00:00",
   "meta": {
    "ultimas_ofertas": 5
   }
  },
  "empresa:Desigual": {
   "last_error": "HTTPError: 404 Client Error: Not Found for url: https://jobs.desigual.com/search?q=&locationsearch=Barcelona&sortColumn=referencedate&sortDirection=desc&startrow=0",
-  "last_run": "2026-11-23T18:50:39.569547+00:00",
+  "last_run": "2026-11-23T19:55:47.949885+00:00",
   "meta": {
    "ultimas_ofertas": 0
   }
  },
  "empresa:Inditex (Stradivarius, Bershka, Oysho, Massimo Dutti)": {
   "last_error": "HTTPError: 403 Client Error: Forbidden for url: https://www.inditexpeople.com/",
-  "last_run": "2026-11-23T18:50:39.569547+00:00",
+  "last_run": "2026-11-23T19:55:47.949885+00:00",
   "meta": {
    "ultimas_ofertas": 0
   }
  },
  "empresa:Luxe Talent": {
   "last_error": "",
-  "last_run": "2026-11-23T18:50:39.569547+00:00",
+  "last_run": "2026-11-23T19:55:47.949885+00:00",
   "meta": {
    "ultimas_ofertas": 0
   }
  },
  "empresa:Mango": {
   "last_error": "",
-  "last_run": "2026-11-23T18:50:39.569547+00:00",
+  "last_run": "2026-11-23T19:55:47.949885+00:00",
   "meta": {
    "ultimas_ofertas": 0
   }
  },
  "empresa:Meller": {
   "last_error": "",
-  "last_run": "2026-11-23T18:50:39.569547+00:00",
+  "last_run": "2026-11-23T19:55:47.949885+00:00",
   "meta": {
    "ultimas_ofertas": 13
   }
  },
  "empresa:Mytheresa": {
   "last_error": "",
-  "last_run": "2026-11-23T18:50:39.569547+00:00",
+  "last_run": "2026-11-23T19:55:47.949885+00:00",
   "meta": {
    "ultimas_ofertas": 0
   }
  },
  "empresa:Newflag": {
   "last_error": "",
-  "last_run": "2026-11-23T18:50:39.569547+00:00",
+  "last_run": "2026-11-23T19:55:47.949885+00:00",
   "meta": {
    "ultimas_ofertas": 17
   }
  },
  "empresa:Nude Project": {
   "last_error": "",
-  "last_run": "2026-11-23T18:50:39.569547+00:00",
+  "last_run": "2026-11-23T19:55:47.949885+00:00",
   "meta": {
    "ultimas_ofertas": 14
   }
  },
  "empresa:Olistic": {
   "last_error": "",
-  "last_run": "2026-11-23T18:50:39.569547+00:00",
+  "last_run": "2026-11-23T19:55:47.949885+00:00",
   "meta": {
    "ultimas_ofertas": 0
   }
  },
  "empresa:Paloma Wool": {
   "last_error": "",
-  "last_run": "2026-11-23T18:50:39.569547+00:00",
+  "last_run": "2026-11-23T19:55:47.949885+00:00",
   "meta": {
    "ultimas_ofertas": 1
   }
  },
  "empresa:Pronovias": {
   "last_error": "",
-  "last_run": "2026-11-23T18:50:39.569547+00:00",
+  "last_run": "2026-11-23T19:55:47.949885+00:00",
   "meta": {
    "ultimas_ofertas": 22
   }
  },
  "empresa:Puig": {
   "last_error": "",
-  "last_run": "2026-11-23T18:50:39.569547+00:00",
+  "last_run": "2026-11-23T19:55:47.949885+00:00",
   "meta": {
    "ultimas_ofertas": 41
   }
  },
  "empresa:Revlon (oficina de Cornellà)": {
   "last_error": "",
-  "last_run": "2026-11-23T18:50:39.569547+00:00",
+  "last_run": "2026-11-23T19:55:47.949885+00:00",
   "meta": {
-   "ultimas_ofertas": 79
+   "ultimas_ofertas": 78
   }
  },
  "empresa:Thomas Sabo (oficina Iberia)": {
   "last_error": "",
-  "last_run": "2026-11-23T18:50:39.569547+00:00",
+  "last_run": "2026-11-23T19:55:47.949885+00:00",
   "meta": {
    "ultimas_ofertas": 41
   }
  },
  "empresa:Veepee": {
   "last_error": "",
-  "last_run": "2026-11-23T18:50:39.569547+00:00",
+  "last_run": "2026-11-23T19:55:47.949885+00:00",
   "meta": {
    "ultimas_ofertas": 90
   }
  },
  "empresas": {
   "last_error": "",
-  "last_run": "2026-11-23T18:50:39.569547+00:00",
+  "last_run": "2026-11-23T19:55:47.949885+00:00",
   "meta": {
-   "ultimas_ofertas": 546
+   "ultimas_ofertas": 543
   }
  }
 }
