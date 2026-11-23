@@ -1,0 +1,669 @@
+# =====================================================================
+#  EMPRESAS CON OFICINAS EN BARCELONA (y su página de empleo)
+#
+#  Campos:
+#   nombre:      nombre de la empresa
+#   alias:       otros nombres con los que aparece en los portales (opcional)
+#   sector:      Moda | Belleza | [Moda, Belleza] (si tiene de los dos, se decide
+#                por las palabras de cada oferta; el primero es el de por defecto)
+#   tipo:        solo informativo
+#   plataforma:  cómo se leen sus ofertas:
+#                  greenhouse | greenhouse_eu | lever | lever_eu | workable |
+#                  personio | teamtailor | smartrecruiters | recruitee | ashby |
+#                  successfactors | workday | factorial | html | pendiente | ninguna
+#                "pendiente" = todavía no se ha confirmado su página de empleo:
+#                la app no la consulta (sus ofertas llegan por LinkedIn,
+#                Indeed o InfoJobs) y aparece en el resumen de la web.
+#                "ninguna" = no tiene página de empleo propia.
+#   id:          identificador en la plataforma (p. ej. jobs.lever.co/ID)
+#   url:         página de empleo (para successfactors, teamtailor, factorial,
+#                workday y html)
+#   enlace_patron: (solo html) texto que deben contener los enlaces a ofertas
+#   ubicacion:   ubicación por defecto si la oferta no la indica
+#   estado:      verificada | por_verificar | pendiente
+#   notas:       lo que quieras
+#
+#  Para AÑADIR una empresa, copia un bloque y cámbialo. Si no sabes su
+#  plataforma, pon "plataforma: pendiente" y "web:" con su dirección.
+#  Cómo averiguar la plataforma: abre una oferta suya y mira la dirección:
+#    boards.greenhouse.io/XXX o job-boards.greenhouse.io/XXX → greenhouse, id: XXX
+#    job-boards.eu.greenhouse.io/XXX                         → greenhouse_eu, id: XXX
+#    jobs.lever.co/XXX                                       → lever, id: XXX
+#    apply.workable.com/XXX                                  → workable, id: XXX
+#    XXX.jobs.personio.de  /  XXX.jobs.personio.com          → personio, id: XXX
+#    XXX.teamtailor.com o una web con /jobs/12345-titulo     → teamtailor, url: (inicio de la web de empleo)
+#    jobs.smartrecruiters.com/XXX                            → smartrecruiters, id: XXX
+#    XXX.recruitee.com                                       → recruitee, id: XXX
+#    jobs.ashbyhq.com/XXX                                    → ashby, id: XXX
+#    XXX.factorial.es / XXX.factorialhr.com /job_posting/... → factorial, url: https://XXX.factorial.es
+#    una web con /job/Ciudad-Titulo/123456/ (SAP)            → successfactors, url: (inicio de la web)
+#    XXX.wd3.myworkdayjobs.com/SITIO                         → workday, url: (esa dirección)
+#  (AQUÍ PUEDES AÑADIR MÁS EMPRESAS QUE TE INTERESEN, al final de la lista)
+# =====================================================================
+
+empresas:
+
+  # ------------------------------------------------------------------
+  # MODA – grandes y medianas
+  # ------------------------------------------------------------------
+  - nombre: Mango
+    alias: [mango fashion group, punto fa]
+    sector: Moda
+    tipo: Gran empresa
+    plataforma: html
+    url: https://jobs.mango.com/es/
+    enlace_patron: "/job"
+    ubicacion: Palau-solità i Plegamans (Barcelona)
+    estado: por_verificar
+    notas: "Sede en Palau-solità i Plegamans (bus de empresa desde BCN). Su portal usa Workday por detrás: si la lectura ligera no encuentra ofertas, abre una oferta, copia la dirección myworkdayjobs.com y cambia a plataforma: workday."
+
+  - nombre: Desigual
+    sector: Moda
+    tipo: Gran empresa
+    plataforma: successfactors
+    url: https://jobs.desigual.com
+    ubicacion: Barcelona
+    estado: verificada
+    notas: "HQ en la Barceloneta."
+
+  - nombre: Pronovias
+    alias: [pronovias group]
+    sector: Moda
+    tipo: Gran empresa (nupcial)
+    plataforma: teamtailor
+    url: https://careers.pronovias.com
+    ubicacion: El Prat de Llobregat (Barcelona)
+    estado: verificada
+
+  - nombre: Inditex (Stradivarius, Bershka, Oysho, Massimo Dutti)
+    alias: [inditex, stradivarius, bershka, oysho, massimo dutti, zara, pull&bear, lefties]
+    sector: Moda
+    tipo: Gran empresa
+    plataforma: html
+    url: https://www.inditexcareers.com/portalweb/es/
+    enlace_patron: "/offer/"
+    ubicacion: ""
+    estado: por_verificar
+    notas: "Stradivarius tiene sede en Sant Esteve Sesrovires. El portal es muy dinámico; sus ofertas de oficina también salen en InfoJobs y LinkedIn."
+
+  - nombre: Tous
+    alias: [joyeria tous, tous jewelry]
+    sector: Moda
+    tipo: Gran empresa (joyería)
+    plataforma: pendiente
+    web: https://www.tous.com
+    ubicacion: Manresa / Barcelona
+    estado: pendiente
+    notas: "Sede en Manresa; publica en LinkedIn e InfoJobs."
+
+  - nombre: Rosa Clará
+    alias: [rosa clara, grupo rosa clara]
+    sector: Moda
+    tipo: Mediana (nupcial)
+    plataforma: pendiente
+    web: https://www.rosaclara.es
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: Custo Barcelona
+    alias: [custo]
+    sector: Moda
+    tipo: Mediana
+    plataforma: pendiente
+    web: https://www.custo.com
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: Munich
+    alias: [munich sports, calzados munich, berneda]
+    sector: Moda
+    tipo: Mediana (calzado)
+    plataforma: pendiente
+    web: https://www.munichsports.com
+    ubicacion: Barcelona (provincia)
+    estado: pendiente
+
+  - nombre: Sita Murt
+    sector: Moda
+    tipo: Mediana
+    plataforma: pendiente
+    web: https://www.sitamurt.com
+    ubicacion: Igualada / Barcelona
+    estado: pendiente
+
+  - nombre: Bóboli
+    alias: [boboli]
+    sector: Moda
+    tipo: Mediana (infantil)
+    plataforma: pendiente
+    web: https://www.boboli.es
+    ubicacion: Barcelona (provincia)
+    estado: pendiente
+
+  - nombre: Veepee
+    alias: [privalia, vente-privee, veepee spain]
+    sector: [Moda, Belleza]
+    tipo: E-commerce de moda
+    plataforma: lever
+    id: veepee
+    ubicacion: Barcelona
+    estado: verificada
+    notas: "Muchas ofertas son prácticas (se descartan solas)."
+
+  - nombre: Mytheresa
+    alias: [mytheresa spain services]
+    sector: Moda
+    tipo: E-commerce de lujo
+    plataforma: successfactors
+    url: https://careers.mytheresa.com
+    ubicacion: Barcelona
+    estado: verificada
+    notas: "Oficina en Barcelona (tecnología, contenido, e-commerce)."
+
+  - nombre: Punto Blanco
+    sector: Moda
+    tipo: Mediana (ropa interior)
+    plataforma: pendiente
+    web: https://www.puntoblanco.com
+    ubicacion: Barcelona (provincia)
+    estado: pendiente
+
+  - nombre: Lola Casademunt
+    sector: Moda
+    tipo: Mediana
+    plataforma: pendiente
+    web: https://www.lolacasademunt.com
+    ubicacion: Cabrera de Mar / Mataró
+    estado: pendiente
+
+  - nombre: Simorra
+    alias: [javier simorra]
+    sector: Moda
+    tipo: Mediana
+    plataforma: pendiente
+    web: https://www.simorra.com
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: Escorpion
+    alias: [escorpion studio barcelona]
+    sector: Moda
+    tipo: Mediana (punto)
+    plataforma: pendiente
+    web: https://www.escorpion.com
+    ubicacion: Igualada
+    estado: pendiente
+
+  - nombre: Yerse
+    sector: Moda
+    tipo: Mediana
+    plataforma: pendiente
+    web: https://www.yerse.com
+    ubicacion: Igualada
+    estado: pendiente
+
+  - nombre: Naulover
+    sector: Moda
+    tipo: Mediana (punto)
+    plataforma: pendiente
+    web: https://www.naulover.com
+    ubicacion: Igualada
+    estado: pendiente
+
+  - nombre: Wom&Now
+    alias: [wom&now, wom and now]
+    sector: Moda
+    tipo: Mediana
+    plataforma: pendiente
+    web: https://womandnow.com
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: Vertex Group
+    sector: Moda
+    tipo: Diseño y producción para marcas
+    plataforma: pendiente
+    ubicacion: Barcelona
+    estado: pendiente
+    notas: "Aparece en FashionUnited contratando en Barcelona."
+
+  - nombre: Natura (Natura Selection)
+    alias: [natura selection, natura]
+    sector: [Moda, Belleza]
+    tipo: Retail lifestyle (moda, regalo, cosmética)
+    plataforma: pendiente
+    web: https://www.naturaselection.com
+    ubicacion: Barcelona
+    estado: pendiente
+    notas: "Publica en InfoJobs. No confundir con Natura Bissé."
+
+  - nombre: Thomas Sabo (oficina Iberia)
+    alias: [thomas sabo]
+    sector: Moda
+    tipo: Joyería internacional
+    plataforma: html
+    url: https://karriere.thomassabo.com/puestos-vacantes.html
+    enlace_patron: "/detail/"
+    ubicacion: Barcelona
+    estado: por_verificar
+    notas: "Ha publicado Content Creator con base en su oficina de Barcelona."
+
+  - nombre: Swarovski (oficina Iberia)
+    alias: [swarovski]
+    sector: Moda
+    tipo: Joyería internacional
+    plataforma: pendiente
+    web: https://www.swarovski.com/es-ES/s-careers/
+    ubicacion: Barcelona
+    estado: pendiente
+    notas: "Su oficina de Barcelona da soporte a la península (marketing, merchandising...)."
+
+  - nombre: Fabletics (oficina Europa)
+    alias: [fabletics]
+    sector: Moda
+    tipo: Moda deportiva internacional
+    plataforma: pendiente
+    ubicacion: Barcelona
+    estado: pendiente
+
+  # ------------------------------------------------------------------
+  # MODA – pequeñas, emergentes, sostenibles y nativas digitales
+  # ------------------------------------------------------------------
+  - nombre: Brava Fabrics
+    sector: Moda
+    tipo: Pequeña / sostenible
+    plataforma: pendiente
+    web: https://www.bravafabrics.com
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: Thinking Mu
+    sector: Moda
+    tipo: Pequeña / sostenible
+    plataforma: pendiente
+    web: https://thinkingmu.com
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: Lefrik
+    sector: Moda
+    tipo: Pequeña / sostenible (bolsos)
+    plataforma: pendiente
+    web: https://lefrik.com
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: Paloma Wool
+    sector: Moda
+    tipo: Pequeña / emergente
+    plataforma: factorial
+    url: https://palomawool.factorial.es
+    ubicacion: Barcelona
+    estado: verificada
+
+  - nombre: Meller
+    alias: [meller brand, mellerbrand]
+    sector: Moda
+    tipo: Nativa digital (gafas y accesorios)
+    plataforma: factorial
+    url: https://mellerbrand.factorial.es
+    ubicacion: Barcelona
+    estado: verificada
+    notas: "Publica puestos de contenido, campañas y TikTok."
+
+  - nombre: Nude Project
+    sector: Moda
+    tipo: Nativa digital (streetwear)
+    plataforma: teamtailor
+    url: https://nudeproject.teamtailor.com
+    ubicacion: Barcelona
+    estado: por_verificar
+    notas: "Oficinas en el 22@. Publica en Teamtailor; comprueba que la dirección es la correcta."
+
+  - nombre: PDPAOLA
+    sector: Moda
+    tipo: Nativa digital (joyería)
+    plataforma: pendiente
+    web: https://www.pdpaola.com
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: Mr. Wonderful
+    alias: [mr wonderful]
+    sector: Moda
+    tipo: Lifestyle / accesorios
+    plataforma: pendiente
+    web: https://www.mrwonderfulshop.es
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: Manebí
+    alias: [manebi]
+    sector: Moda
+    tipo: Pequeña (alpargatas de lujo)
+    plataforma: pendiente
+    web: https://www.manebi.com
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: Majoral
+    sector: Moda
+    tipo: Pequeña (joyería)
+    plataforma: pendiente
+    web: https://www.majoral.com
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: Dominnico
+    sector: Moda
+    tipo: Emergente (diseñador)
+    plataforma: pendiente
+    web: https://dominnico.com
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: Lebor Gabala
+    sector: Moda
+    tipo: Pequeña
+    plataforma: pendiente
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: Paez
+    sector: Moda
+    tipo: Mediana (calzado)
+    plataforma: pendiente
+    web: https://www.paez.com
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: Vasquiat
+    sector: Moda
+    tipo: E-commerce de diseñadores
+    plataforma: pendiente
+    web: https://www.vasquiat.com
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: Wildpony
+    sector: Moda
+    tipo: Nativa digital
+    plataforma: pendiente
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: YolanCris
+    alias: [yolan cris]
+    sector: Moda
+    tipo: Pequeña (nupcial)
+    plataforma: pendiente
+    web: https://www.yolancris.com
+    ubicacion: Barcelona
+    estado: pendiente
+
+  # ------------------------------------------------------------------
+  # BELLEZA Y COSMÉTICA
+  # ------------------------------------------------------------------
+  - nombre: Puig
+    alias: [puig brands, carolina herrera, paco rabanne, rabanne, jean paul gaultier, byredo, dries van noten, nina ricci, uriage, apivita]
+    sector: [Belleza, Moda]
+    tipo: Gran empresa (belleza y moda)
+    plataforma: successfactors
+    url: https://jobs.puig.com
+    ubicacion: L'Hospitalet de Llobregat (Barcelona)
+    estado: verificada
+    notas: "Muchos Graduate Programs (contrato de 1 año) en marketing, trade marketing y digital."
+
+  - nombre: ISDIN
+    sector: Belleza
+    tipo: Gran empresa (dermocosmética)
+    plataforma: pendiente
+    web: https://www.isdin.com
+    ubicacion: Barcelona
+    estado: pendiente
+    notas: "Publica Marketing Trainee, Trade Marketing y Social Media en Barcelona. Busca su página de empleo y cambia la plataforma."
+
+  - nombre: Natura Bissé
+    alias: [natura bisse]
+    sector: Belleza
+    tipo: Cosmética de lujo
+    plataforma: pendiente
+    web: https://www.naturabisse.com
+    ubicacion: Esplugues / Barcelona
+    estado: pendiente
+
+  - nombre: Almirall
+    sector: Belleza
+    tipo: Farmacéutica (dermatología)
+    plataforma: successfactors
+    url: https://careers.almirall.com
+    ubicacion: Barcelona
+    estado: verificada
+    notas: "Sobre todo marketing farmacéutico; muchas 'Intern/Becario' (se descartan solas)."
+
+  - nombre: Uriach
+    sector: Belleza
+    tipo: Salud natural y dermocosmética
+    plataforma: pendiente
+    web: https://www.uriach.com
+    ubicacion: Palau-solità i Plegamans
+    estado: pendiente
+
+  - nombre: Martiderm
+    alias: [laboratorios marti tor]
+    sector: Belleza
+    tipo: Dermocosmética
+    plataforma: pendiente
+    web: https://www.martiderm.com
+    ubicacion: Barcelona (provincia)
+    estado: pendiente
+
+  - nombre: Cocunat
+    sector: Belleza
+    tipo: Nativa digital (cosmética natural)
+    plataforma: personio
+    id: cocunat
+    ubicacion: Barcelona
+    estado: verificada
+
+  - nombre: Newflag
+    alias: [newflag iberia]
+    sector: Belleza
+    tipo: Distribuidor (invisibobble, Tangle Teezer, Color Wow...)
+    plataforma: personio
+    id: newflag
+    ubicacion: Barcelona
+    estado: verificada
+    notas: "Ha publicado Junior Influencer Marketing Manager en Barcelona."
+
+  - nombre: Olistic
+    alias: [olistic science]
+    sector: Belleza
+    tipo: Nativa digital (cuidado capilar)
+    plataforma: factorial
+    url: https://olisticscience.factorialhr.com
+    ubicacion: Barcelona
+    estado: verificada
+
+  - nombre: Revlon (oficina de Cornellà)
+    alias: [revlon, elizabeth arden]
+    sector: Belleza
+    tipo: Multinacional
+    plataforma: greenhouse
+    id: revloncorporate
+    ubicacion: Cornellà de Llobregat
+    estado: verificada
+
+  - nombre: Charlotte Tilbury
+    sector: Belleza
+    tipo: Multinacional
+    plataforma: workable
+    id: charlotte-tilbury
+    ubicacion: Barcelona
+    estado: verificada
+    notas: "En Barcelona casi todo es travel retail/tienda (se descarta solo)."
+
+  - nombre: Beiersdorf (Nivea)
+    alias: [beiersdorf, nivea]
+    sector: Belleza
+    tipo: Multinacional
+    plataforma: pendiente
+    web: https://www.beiersdorf.com/career/jobs
+    ubicacion: Barcelona
+    estado: pendiente
+    notas: "Ha publicado Marketing Trainee (1 año, jornada completa) en Barcelona."
+
+  - nombre: Henkel Ibérica (Schwarzkopf)
+    alias: [henkel, schwarzkopf]
+    sector: Belleza
+    tipo: Multinacional
+    plataforma: pendiente
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: Pierre Fabre Ibérica
+    alias: [pierre fabre, avene]
+    sector: Belleza
+    tipo: Dermocosmética
+    plataforma: pendiente
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: NAOS (Bioderma)
+    alias: [naos, bioderma, institut esthederm]
+    sector: Belleza
+    tipo: Dermocosmética
+    plataforma: pendiente
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: Lacer
+    sector: Belleza
+    tipo: Salud bucal y dermocosmética
+    plataforma: pendiente
+    web: https://www.lacer.es
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: Laboratorios Viñas
+    alias: [vinas]
+    sector: Belleza
+    tipo: Dermocosmética / farmacia
+    plataforma: pendiente
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: Byly
+    alias: [laboratorios byly]
+    sector: Belleza
+    tipo: Cosmética
+    plataforma: pendiente
+    ubicacion: Barcelona (provincia)
+    estado: pendiente
+
+  - nombre: Instituto Español
+    sector: Belleza
+    tipo: Cosmética
+    plataforma: pendiente
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: Sepai
+    sector: Belleza
+    tipo: Cosmética de lujo (pequeña)
+    plataforma: pendiente
+    web: https://www.sepai.com
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: Naturitas
+    sector: Belleza
+    tipo: E-commerce (cosmética natural y salud)
+    plataforma: pendiente
+    web: https://www.naturitas.es
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: Perfumerías Júlia
+    alias: [julia, perfumerias julia]
+    sector: Belleza
+    tipo: Retail de perfumería
+    plataforma: pendiente
+    ubicacion: Barcelona (provincia)
+    estado: pendiente
+
+  # ------------------------------------------------------------------
+  # AGENCIAS DE PR / COMUNICACIÓN, SHOWROOMS Y DISTRIBUIDORES
+  # ------------------------------------------------------------------
+  - nombre: La Maison Comunicación
+    alias: [la maison]
+    sector: [Moda, Belleza]
+    tipo: Agencia de PR (moda, belleza, lifestyle)
+    plataforma: pendiente
+    web: https://lamaisoncomunicacion.com
+    ubicacion: Barcelona
+    estado: pendiente
+    notas: "Oficinas en Madrid y Barcelona."
+
+  - nombre: Tal Cual Comunicación
+    alias: [tal cual]
+    sector: Moda
+    tipo: Agencia de prensa y showroom de moda
+    plataforma: pendiente
+    web: https://www.talcualcomunicacion.com
+    ubicacion: Barcelona
+    estado: pendiente
+    notas: "Showrooms en Madrid y Barcelona."
+
+  - nombre: Pressego Comunicación
+    alias: [pressego]
+    sector: Moda
+    tipo: Agencia de comunicación de moda
+    plataforma: pendiente
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: The Castle (agencia de influencia)
+    alias: [the castle]
+    sector: [Moda, Belleza]
+    tipo: Agencia boutique de marketing de influencia
+    plataforma: pendiente
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: Luxe Talent
+    sector: Moda
+    tipo: Consultora de selección (moda, retail y lujo)
+    plataforma: html
+    url: https://luxetalent.talentclue.com/es
+    enlace_patron: "/node/"
+    ubicacion: Barcelona
+    estado: por_verificar
+    notas: "Publica ofertas de sus clientes de moda y lujo en Barcelona."
+
+  - nombre: Vlanc
+    sector: Moda
+    tipo: Agencia comercial / showroom
+    plataforma: pendiente
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: The Fashion Hub (Moøde)
+    alias: [the fashion hub, moode]
+    sector: Moda
+    tipo: Showroom y coworking de marcas
+    plataforma: pendiente
+    ubicacion: Barcelona
+    estado: pendiente
+
+  - nombre: Santa Eulalia
+    sector: Moda
+    tipo: Multimarca de lujo
+    plataforma: pendiente
+    web: https://www.santaeulalia.com
+    ubicacion: Barcelona
+    estado: pendiente
+
+  # ------------------------------------------------------------------
+  # (AQUÍ AÑADIRÉ MÁS EMPRESAS QUE ME INTERESEN)
+  # ------------------------------------------------------------------

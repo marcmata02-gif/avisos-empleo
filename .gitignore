@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.env
+.env.*
+.venv/
+.pytest_cache/
+# Nunca subas aquí tu perfil, tus CVs ni contraseñas
+perfil*
+*.pdf
+*.docx

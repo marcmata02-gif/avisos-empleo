@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#1d1a17" />
+  <title>Ofertas · Barcelona</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👗</text></svg>" />
+</head>
+<body>
+  <div id="app">
+    <!-- Pantalla de acceso -->
+    <section id="login" class="screen hidden">
+      <div class="login-card">
+        <h1>Ofertas<span>·BCN</span></h1>
+        <p class="muted">Introduce tu email y te llegará un enlace para entrar.</p>
+        <form id="login-form">
+          <input id="login-email" type="email" autocomplete="email" placeholder="tu@email.com" required />
+          <button type="submit" class="btn primary">Enviarme el enlace</button>
+        </form>
+        <p id="login-msg" class="muted small"></p>
+      </div>
+    </section>
+
+    <!-- Aviso de configuración -->
+    <section id="setup" class="screen hidden">
+      <div class="login-card">
+        <h1>Falta configurar</h1>
+        <p class="muted">La web no encuentra los datos de Supabase. Revisa el paso 7 de la guía
+          (secretos <code>SUPABASE_URL</code> y <code>SUPABASE_PUBLISHABLE_KEY</code>) y vuelve a publicar la web.</p>
+      </div>
+    </section>
+
+    <!-- Aplicación -->
+    <section id="main" class="hidden">
+      <header class="topbar">
+        <div class="brand">Ofertas<span>·BCN</span></div>
+        <div class="top-actions">
+          <button id="btn-refresh" class="icon-btn" title="Actualizar" aria-label="Actualizar">↻</button>
+          <button id="btn-logout" class="icon-btn text" title="Salir">Salir</button>
+        </div>
+      </header>
+
+      <nav class="tabs" id="tabs">
+        <button data-tab="nuevas" class="active">Nuevas <b id="c-nuevas"></b></button>
+        <button data-tab="guardada">Guardadas <b id="c-guardada"></b></button>
+        <button data-tab="aplicada">Aplicadas <b id="c-aplicada"></b></button>
+        <button data-tab="descartada">Descartadas <b id="c-descartada"></b></button>
+        <button data-tab="todas">Todas</button>
+      </nav>
+
+      <div class="filters">
+        <input id="f-q" type="search" placeholder="Buscar puesto, empresa, palabra…" />
+        <div class="filter-row">
+          <select id="f-area"><option value="">Área</option></select>
+          <select id="f-sector"><option value="">Sector</option><option>Moda</option><option>Belleza</option></select>
+          <select id="f-company"><option value="">Empresa</option></select>
+          <select id="f-source"><option value="">Portal</option></select>
+        </div>
+        <div class="filter-row toggles">
+          <label class="toggle"><input id="f-grad" type="checkbox" /> <span>Solo graduate programs</span></label>
+          <label class="toggle"><input id="f-rejected" type="checkbox" /> <span>Ver las que descartó el filtro</span></label>
+        </div>
+      </div>
+
+      <p id="summary-line" class="muted small pad"></p>
+      <ul id="list" class="list"></ul>
+      <p id="empty" class="muted pad hidden">No hay ofertas con estos filtros.</p>
+
+      <details class="status pad" id="status">
+        <summary>Estado de las fuentes</summary>
+        <div id="status-body"></div>
+      </details>
+    </section>
+  </div>
+
+  <template id="card-tpl">
+    <li class="card">
+      <div class="card-top">
+        <div class="badges"></div>
+        <span class="ago"></span>
+      </div>
+      <h2 class="title"></h2>
+      <p class="company"></p>
+      <div class="chips"></div>
+      <p class="summary"></p>
+      <div class="warnings"></div>
+      <details class="reqs"><summary>Qué piden</summary><ul></ul></details>
+      <p class="cv"></p>
+      <p class="reason"></p>
+      <div class="sources"></div>
+      <div class="actions">
+        <a class="btn primary apply" target="_blank" rel="noopener">Aplicar</a>
+        <button class="btn st" data-st="guardada">☆ Guardar</button>
+        <button class="btn st" data-st="aplicada">✓ Aplicada</button>
+        <button class="btn st" data-st="descartada">✕</button>
+      </div>
+      <div class="applied hidden">
+        <label>CV con el que apliqué
+          <select class="cv-used"></select>
+        </label>
+        <label>Notas
+          <textarea class="note" rows="2" placeholder="Fecha, contacto, próximos pasos…"></textarea>
+        </label>
+      </div>
+    </li>
+  </template>
+
+  <script src="config.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

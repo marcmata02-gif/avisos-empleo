@@ -1,0 +1,74 @@
+name: Buscar ofertas
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"   # cada 30 minutos (GitHub puede retrasarlo unos minutos)
+  workflow_dispatch:
+    inputs:
+      modo:
+        description: "Qué hacer"
+        type: choice
+        default: normal
+        options: [normal, prueba, probar-telegram]
+      fuente:
+        description: "Solo esta fuente (gmail, infojobs, adzuna, rss, empresas o nombre de empresa). Vacío = todas"
+        required: false
+        default: ""
+
+permissions:
+  contents: write   # solo para el "keepalive" mensual (ver abajo)
+
+concurrency:
+  group: buscar-ofertas
+  cancel-in-progress: false
+
+jobs:
+  buscar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar
+        run: pip install -r requirements.txt
+
+      - name: Revisar fuentes
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          INFOJOBS_CLIENT_ID: ${{ secrets.INFOJOBS_CLIENT_ID }}
+          INFOJOBS_CLIENT_SECRET: ${{ secrets.INFOJOBS_CLIENT_SECRET }}
+          ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
+          ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
+          WEB_URL: ${{ vars.WEB_URL }}
+          MODO: ${{ github.event.inputs.modo || 'normal' }}
+          FUENTE: ${{ github.event.inputs.fuente || '' }}
+        run: |
+          ARGS=()
+          if [ "$MODO" = "prueba" ]; then ARGS+=(--prueba); fi
+          if [ "$MODO" = "probar-telegram" ]; then ARGS+=(--probar-telegram); fi
+          if [ -n "$FUENTE" ]; then ARGS+=(--fuente "$FUENTE"); fi
+          python -m jobwatch.main "${ARGS[@]}"
+
+      # GitHub desactiva las tareas programadas de los repositorios públicos
+      # tras 60 días sin cambios. Este paso hace un commit vacío cada ~45 días.
+      - name: Mantener activo
+        if: github.event_name == 'schedule'
+        run: |
+          last=$(git log -1 --format=%ct)
+          now=$(date +%s)
+          if [ $(( (now - last) / 86400 )) -ge 45 ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit --allow-empty -m "Mantener activa la búsqueda programada"
+            git push
+          fi

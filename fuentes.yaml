@@ -1,0 +1,87 @@
+# =====================================================================
+#  FUENTES DE OFERTAS
+#  "cada_minutos": cada cuánto se consulta cada fuente. La revisión general
+#  se lanza cada 30 minutos; una fuente con 60 se consulta en una de cada dos.
+#  "activa: false" desactiva una fuente sin borrar su configuración.
+# =====================================================================
+
+gmail:
+  activa: true
+  cada_minutos: 30
+  servidor: imap.gmail.com
+  carpeta: INBOX
+  # Etiqueta que la app pone a los emails ya leídos (se crea sola).
+  etiqueta_procesado: ofertas-procesadas
+  # Solo se miran emails de los últimos N días.
+  dias: 3
+  # Remitentes reconocidos. Se identifican por el dominio del remitente.
+  portales:
+    linkedin: [linkedin.com]
+    indeed: [indeed.com, indeedemail.com, indeed.es]
+    fashionjobs: [fashionjobs.com]
+    fashionunited: [fashionunited.com, fashionunited.es]
+    infojobs: [infojobs.net]
+  # Las alertas de LinkedIn e Indeed se crean con el filtro "Jornada completa",
+  # así que sus ofertas se consideran de jornada completa aunque el email no
+  # lo diga (si no, todas llevarían el aviso "Jornada no indicada").
+  jornada_implicita:
+    linkedin: completa
+    indeed: completa
+  # Todas las ofertas de estos portales son del sector moda.
+  sector_por_defecto:
+    fashionjobs: Moda
+    fashionunited: Moda
+
+infojobs:
+  activa: true
+  cada_minutos: 60
+  provincia: barcelona
+  # Una búsqueda por línea (InfoJobs busca en título y descripción).
+  busquedas:
+    - marketing moda
+    - comunicacion moda
+    - trade marketing
+    - marketing cosmetica
+    - ecommerce moda
+    - compras moda
+    - relaciones publicas moda
+    - graduate marketing
+    - social media moda
+    - fashion marketing
+  max_resultados: 50
+  # Se pide el detalle (descripción completa) solo de las ofertas que pasan
+  # el primer filtro por título. Límite por revisión:
+  max_detalles: 25
+
+adzuna:
+  activa: true
+  # La cuota gratuita es de ~250 llamadas/día y ~1.000-2.500/mes según el
+  # plan. Con 4 búsquedas cada 240 min = 24 llamadas/día ≈ 720/mes.
+  cada_minutos: 240
+  pais: es
+  donde: Barcelona
+  max_dias: 3
+  busquedas:
+    - {todas: moda, alguna: "marketing comunicacion communications pr prensa ecommerce trade contenido content social compras buyer merchandiser graduate brand"}
+    - {todas: fashion, alguna: "marketing communications pr press ecommerce trade content social buyer merchandiser graduate brand"}
+    - {todas: cosmetica, alguna: "marketing comunicacion pr ecommerce trade contenido social brand graduate"}
+    - {todas: beauty, alguna: "marketing communications pr ecommerce trade content social brand graduate"}
+
+# Feeds RSS de portales del sector. No he encontrado un RSS de ofertas de
+# FashionJobs ni de FashionUnited (solo de noticias), por eso se usan sus
+# alertas por email. Si encuentras uno, añádelo así:
+#   - {nombre: "Portal X", url: "https://.../rss", sector: Moda}
+rss:
+  activa: true
+  cada_minutos: 30
+  feeds: []
+
+empresas:
+  activa: true
+  cada_minutos: 30
+  # Peticiones simultáneas (no subir mucho, por cortesía con las webs).
+  paralelo: 6
+  # Máximo de páginas de detalle que se abren por revisión (solo de ofertas
+  # nuevas que ya pasan el filtro por título).
+  max_detalles: 60
+  timeout_segundos: 20

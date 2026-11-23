@@ -1,0 +1,887 @@
+# =====================================================================
+#  CRITERIOS DE BÚSQUEDA
+#  Puedes editar este archivo directamente en GitHub (botón del lápiz).
+#  Los cambios se aplican en la siguiente revisión (máx. 30 min) y las
+#  ofertas de los últimos 30 días se vuelven a evaluar automáticamente.
+#
+#  Cómo se escriben las palabras clave:
+#   - Da igual mayúsculas/minúsculas y acentos ("comunicación" = "comunicacion").
+#   - Se buscan como palabras completas: "intern" NO coincide con "international".
+#   - Un asterisco al final busca el principio de palabra: "becari*" encuentra
+#     "becario", "becaria", "becarios"...
+#   - Puedes poner frases: "trade marketing", "jornada parcial".
+# =====================================================================
+
+# ---------------------------------------------------------------------
+# UBICACIÓN: la oferta se acepta si su ubicación contiene alguno de estos
+# nombres. Si una oferta no indica ubicación, se usa la de la empresa
+# (empresas.yaml) o se acepta si la fuente ya filtra por Barcelona.
+# ---------------------------------------------------------------------
+ubicacion:
+  aceptar:
+    - barcelona
+    - bcn
+    - barcelones
+    - "l'hospitalet"
+    - hospitalet
+    - badalona
+    - sant adria
+    - santa coloma de gramenet
+    - cornella
+    - "el prat"
+    - prat de llobregat
+    - esplugues
+    - sant just desvern
+    - sant joan despi
+    - sant feliu de llobregat
+    - sant boi
+    - viladecans
+    - gava
+    - castelldefels
+    - molins de rei
+    - sant cugat
+    - cerdanyola
+    - ripollet
+    - montcada
+    - sabadell
+    - terrassa
+    - rubi
+    - sant quirze
+    - mollet
+    - granollers
+    - montornes
+    - parets
+    - mataro
+    - martorell
+    - sant andreu de la barca
+    - palau-solita
+    - palau solita
+    - plegamans
+    - polinya
+    - santa perpetua
+    - barbera del valles
+    - sant esteve sesrovires
+    - abrera
+    - el papiol
+    - tordera
+    - manresa
+    - igualada
+  # Ofertas solo en remoto (sin oficina en Barcelona) se descartan.
+  descartar_solo_remoto: true
+
+# ---------------------------------------------------------------------
+# ÁREAS. Cada oferta debe pertenecer al menos a una. Se comprueba el
+# TÍTULO. Si el título no lo deja claro pero es un graduate program, se
+# mira también la descripción. El orden importa: la primera que coincide
+# es el área principal (por eso Trade Marketing va antes que Marketing).
+# ---------------------------------------------------------------------
+areas:
+  - nombre: Trade Marketing
+    palabras:
+      - trade marketing
+      - trade marketer
+      - retail marketing
+      - shopper marketing
+      - brand activation
+      - activacion de marca
+      - activaciones
+      - activacion en punto de venta
+      - punto de venta
+      - point of sale
+      - pos marketing
+      - omnicanal
+      - omnichannel
+      - omnicanalidad
+      - trade
+      - activation
+      - field marketing
+      - category marketing
+    sectores: [Moda, Belleza]
+
+  - nombre: PR
+    palabras:
+      - pr
+      - relaciones publiques
+      - relaciones publicas
+      - relacions publiques
+      - public relations
+      - press office
+      - press
+      - prensa
+      - premsa
+      - influencer*
+      - influence
+      - celebrity
+      - celebrities
+      - vip relations
+      - seeding
+      - gifting
+      - eventos
+      - events
+      - event
+      - esdeveniments
+      - showroom
+      - talent relations
+    sectores: [Moda, Belleza]
+
+  - nombre: Comunicación/Contenido
+    palabras:
+      - comunicacion
+      - comunicacio
+      - communication*
+      - comms
+      - corporate communication*
+      - contenido*
+      - continguts
+      - content
+      - digital content
+      - social media
+      - xarxes socials
+      - redes sociales
+      - rrss
+      - community manager
+      - copywriter
+      - copywriting
+      - redactor*
+      - storytelling
+      - creative content
+      - creador de contenido
+      - content creator
+      - tiktok
+      - editorial
+      - brand content
+      - employer branding
+    sectores: [Moda, Belleza]
+
+  - nombre: E-commerce
+    palabras:
+      - e-commerce
+      - ecommerce
+      - e commerce
+      - comercio electronico
+      - online merchandiser
+      - e-merchandiser
+      - e-merchandising
+      - ecommerce merchandiser
+      - digital merchandiser
+      - tienda online
+      - botiga online
+      - marketplace*
+      - digital commerce
+      - shopify
+      - e-business
+      - ebusiness
+      - online store
+      - web content
+      - site merchandising
+    sectores: [Moda, Belleza]
+
+  - nombre: Compras
+    palabras:
+      - compras
+      - compres
+      - buyer
+      - buying
+      - assistant buyer
+      - junior buyer
+      - comprador*
+      - merchandiser
+      - merchandise planner
+      - merchandising
+      - product merchandiser
+      - merchandise planner
+      - merchandising planner
+      - product planner
+      - range planner
+      - planificador* de producto
+      - producto
+      - product developer
+      - product development
+      - desarrollo de producto
+      - sourcing
+    sectores: [Moda]        # Compras: solo moda
+
+  - nombre: Marketing
+    palabras:
+      - marketing
+      - marqueting
+      - mkt
+      - brand
+      - marca
+      - brand manager
+      - assistant brand manager
+      - brand assistant
+      - product marketing
+      - marketing digital
+      - digital marketing
+      - crm
+      - email marketing
+      - lifecycle
+      - growth
+      - performance marketing
+      - paid media
+      - media
+      - consumer engagement
+      - marketing assistant
+      - junior product manager
+      - product manager junior
+      - product manager
+      - jefe de producto
+      - gpm
+      - market intelligence
+      - consumer insights
+      - insights
+    sectores: [Moda, Belleza]
+
+# ---------------------------------------------------------------------
+# GRADUATE PROGRAMS: se destacan y tienen prioridad. Un graduate program
+# se mantiene aunque sea un contrato temporal (p. ej. 1 año) o aunque el
+# título diga "Head of ... Graduate", siempre que NO sea beca ni prácticas.
+# ---------------------------------------------------------------------
+graduate:
+  palabras:
+    - graduate
+    - graduate program*
+    - graduate programme
+    - trainee
+    - trainee program*
+    - management trainee
+    - early career*
+    - young talent
+    - jovenes talentos
+    - programa rotativo
+    - rotational program*
+    - rotational programme
+    - talent program*
+    - future leaders
+    - programa de talento
+
+# ---------------------------------------------------------------------
+# NIVEL
+# ---------------------------------------------------------------------
+nivel:
+  # Se descartan si aparecen en el TÍTULO (salvo graduate programs).
+  descartar_titulo:
+    - senior
+    - sr
+    - head
+    - director
+    - directora
+    - directeur
+    - directrice
+    - associate director
+    - lead
+    - leader
+    - principal
+    - vp
+    - vice president
+    - chief
+    - cmo
+  # Excepciones: si el título contiene esto, no se descarta por lo anterior.
+  excepciones_titulo:
+    - lead generation
+    - team lead assistant
+  # Si el título contiene alguna de estas palabras y NO contiene ninguna de
+  # "palabras_junior", se marca con el aviso "Puede pedir más experiencia".
+  marcar_titulo:
+    - manager
+    - responsable
+    - jefe
+    - jefa
+    - cap de
+    - gpm
+  palabras_junior:
+    - junior
+    - jr
+    - assistant
+    - asistente
+    - assistent
+    - auxiliar
+    - trainee
+    - graduate
+    - entry level
+    - entry-level
+  # Se descartan las ofertas que pidan MÁS de estos años de experiencia.
+  max_anos_experiencia: 3
+
+# ---------------------------------------------------------------------
+# IDIOMAS: si una oferta exige como imprescindible uno de estos idiomas,
+# NO se descarta, pero se marca con un aviso.
+# ---------------------------------------------------------------------
+idiomas_aviso:
+  idiomas:
+    francés: [frances, francais, french, frances]
+    italiano: [italiano, italian, italia]
+    alemán: [aleman, german, deutsch, alemany]
+    portugués: [portugues, portuguese]
+    neerlandés: [neerlandes, holandes, dutch]
+    ruso: [ruso, russian]
+    chino: [chino, chinese, mandarin]
+    japonés: [japones, japanese]
+    árabe: [arabe, arabic]
+    turco: [turco, turkish]
+    polaco: [polaco, polish]
+    coreano: [coreano, korean]
+    sueco: [sueco, swedish]
+    danés: [danes, danish]
+    noruego: [noruego, norwegian]
+    griego: [griego, greek]
+  obligatorio:
+    - imprescindible
+    - obligatorio
+    - requerido
+    - requisito
+    - necesario
+    - indispensable
+    - nativo
+    - nativa
+    - fluido
+    - fluida
+    - bilingue
+    - alto nivel
+    - nivel alto
+    - must
+    - required
+    - mandatory
+    - essential
+    - fluent
+    - fluency
+    - native
+    - proficient
+    - proficiency
+    - speaking
+    - speaker
+  opcional:
+    - valorable
+    - se valorara
+    - deseable
+    - plus
+    - nice to have
+    - an asset
+    - advantage
+    - preferred
+    - preferably
+    - bonus
+
+# ---------------------------------------------------------------------
+# DESCARTES SIEMPRE (castellano, catalán e inglés)
+# ---------------------------------------------------------------------
+descartar:
+  # Se aplican SOLO AL TÍTULO
+  titulo_tienda:
+    - dependient*
+    - vendedor*
+    - venedor*
+    - sales assistant
+    - sales advisor
+    - sales associate
+    - sales consultant
+    - store manager
+    - assistant store manager
+    - store assistant
+    - store
+    - tienda
+    - botiga
+    - boutique
+    - shop assistant
+    - shop
+    - encargad*
+    - cajer*
+    - caixer*
+    - cashier
+    - reponedor*
+    - mozo de almacen
+    - almacen*
+    - magatzem
+    - warehouse
+    - stockroom
+    - visual merchandiser de tienda
+    - store visual merchandiser
+    - consejer* de belleza
+    - promotor*
+    - beauty advisor
+    - beauty consultant
+    - beauty expert
+    - brand ambassador
+    - client advisor
+    - embajador* de marca
+    - ambaixador* de marca
+    - personal shopper
+    - brow bar
+    - asesor* de ventas
+    - asesor* de moda
+    - dependent*
+    - estilista de tienda
+    - customer care
+    - customer service
+    - atencion al cliente
+    - call center
+    - teleoperador*
+  titulo_comercial_calle:
+    - delegad* comercial
+    - delegat* comercial
+    - visitador* medic*
+    - representante
+    - representant
+    - comercial de zona
+    - comercial de calle
+    - agente comercial
+    - comercial autonom*
+    - sales representative
+    - medical representative
+    - venta medica
+  titulo_laboratorio_produccion:
+    - tecnic* de laboratorio
+    - laboratorio
+    - laboratori
+    - laboratory
+    - lab technician
+    - operari*
+    - operador* de
+    - produccion
+    - production
+    - produccio
+    - control de calidad
+    - quality control
+    - quality assurance
+    - calidad
+    - quality
+    - patronaje
+    - patronista
+    - costurer*
+    - modelista
+  titulo_practicas:
+    - practicas
+    - practica
+    - practiques
+    - becari*
+    - beca
+    - internship
+    - intern
+    - interns
+    - stage
+    - stagiaire
+    - convenio
+    - alternance
+    - apprentice
+    - apprenticeship
+    - working student
+  titulo_jornada:
+    - media jornada
+    - jornada parcial
+    - part-time
+    - part time
+    - fin de semana
+    - fines de semana
+    - weekend
+    - por horas
+    - campana de navidad
+    - navidad
+    - rebajas
+    - refuerzo
+    - temporal
+    - temporary
+    - fixed term
+    - fixed-term
+    - verano
+    - summer
+    - "20h"
+    - "24h"
+    - "25h"
+    - "30h"
+    - "32h"
+    - "35h"
+  # Frases que se ignoran en el título ANTES de aplicar los descartes de
+  # arriba (para no descartar, p. ej., "Online Store Specialist" o
+  # "Content Production Assistant").
+  excepciones_titulo:
+    - online store
+    - tienda online
+    - botiga online
+    - e-shop
+    - eshop
+    - webshop
+    - shop-in-shop marketing
+    - content production
+    - produccion de contenido*
+    - produccion audiovisual
+    - event production
+    - events production
+    - produccion de eventos
+    - creative production
+    - video production
+    - brand production
+    - shooting production
+    - store marketing
+    - in-store marketing
+    - retail marketing
+  # Se buscan en la DESCRIPCIÓN y en los datos de contrato/jornada
+  descripcion_practicas:
+    - convenio de practicas
+    - convenio con
+    - internship agreement
+    - beca
+    - becario
+    - becaria
+    - estar matriculad*
+    - must be enrolled
+    - currently enrolled
+    - currently pursuing
+    - en curso de estudios
+  descripcion_jornada_parcial:
+    - media jornada
+    - jornada parcial
+    - part-time
+    - part time
+    - por horas
+    - fines de semana
+  # Datos estructurados de contrato que equivalen a "temporal"
+  contrato_temporal:
+    - temporal
+    - temporary
+    - fixed term
+    - fixed-term
+    - duracion determinada
+    - eventual
+    - interinidad
+    - sustitucion
+    - maternity cover
+    - baja maternal
+    - obra y servicio
+  # Frases de la DESCRIPCIÓN que indican contrato temporal (solo se miran
+  # si la fuente no da el tipo de contrato)
+  descripcion_temporal:
+    - contrato temporal
+    - contrato de duracion determinada
+    - temporary contract
+    - temporary role
+    - fixed-term contract
+    - fixed term contract
+    - maternity cover
+    - maternity leave cover
+    - baja maternal
+    - baja de maternidad
+    - sustitucion de baja
+    - cobertura de baja
+  # Pon false si quieres recibir también contratos temporales
+  descartar_contrato_temporal: true
+
+# Palabras que indican jornada completa (para quitar el aviso "Jornada no indicada")
+jornada_completa:
+  - jornada completa
+  - tiempo completo
+  - full time
+  - full-time
+  - fulltime
+  - jornada intensiva
+  - 40 horas
+  - 40h
+  - 39 horas
+  - 37,5 horas
+  - 37.5 horas
+  - jornada laboral completa
+  - temps complet
+
+# ---------------------------------------------------------------------
+# SECTOR: Moda (prioritario) y Belleza (secundario).
+# 1) Si la empresa está en empresas.yaml, se usa su sector.
+# 2) Si no, se buscan estas marcas en el nombre de la empresa.
+# 3) Si no, se buscan las palabras en el título y la descripción.
+# Si no se detecta ningún sector, la oferta se descarta.
+# ---------------------------------------------------------------------
+sector:
+  marcas_moda:
+    - inditex
+    - zara
+    - bershka
+    - stradivarius
+    - massimo dutti
+    - oysho
+    - pull&bear
+    - pull and bear
+    - lefties
+    - h&m
+    - cos
+    - arket
+    - uniqlo
+    - primark
+    - tendam
+    - cortefiel
+    - springfield
+    - women'secret
+    - womensecret
+    - pepe jeans
+    - hackett
+    - levi*
+    - tommy hilfiger
+    - calvin klein
+    - pvh
+    - lacoste
+    - hugo boss
+    - ralph lauren
+    - bestseller
+    - nike
+    - adidas
+    - puma
+    - asics
+    - new balance
+    - on running
+    - skechers
+    - vans
+    - timberland
+    - the north face
+    - vf corporation
+    - deckers
+    - ugg
+    - hoka
+    - crocs
+    - birkenstock
+    - pandora
+    - swarovski
+    - thomas sabo
+    - tous
+    - lvmh
+    - kering
+    - gucci
+    - prada
+    - balenciaga
+    - loewe
+    - chanel
+    - hermes
+    - dior
+    - burberry
+    - mytheresa
+    - zalando
+    - farfetch
+    - vinted
+    - shein
+    - fabletics
+    - scalpers
+    - el ganso
+    - bimba y lola
+    - sfera
+    - parfois
+    - mango
+    - desigual
+    - pronovias
+    - rosa clara
+    - el corte ingles
+    - hunkemoller
+    - intimissimi
+    - calzedonia
+    - tezenis
+    - tiger of sweden
+    - diesel
+    - guess
+    - michael kors
+    - tapestry
+    - coach
+    - kate spade
+    - capri holdings
+    - jd sports
+    - foot locker
+    - decathlon
+  marcas_belleza:
+    - puig
+    - loreal
+    - "l'oreal"
+    - estee lauder
+    - shiseido
+    - coty
+    - sephora
+    - douglas
+    - druni
+    - primor
+    - kiko
+    - rituals
+    - beiersdorf
+    - nivea
+    - henkel
+    - schwarzkopf
+    - revlon
+    - charlotte tilbury
+    - benefit
+    - clarins
+    - lancome
+    - isdin
+    - natura bisse
+    - pierre fabre
+    - naos
+    - bioderma
+    - avene
+    - la roche-posay
+    - vichy
+    - cerave
+    - galderma
+    - cantabria labs
+    - sesderma
+    - martiderm
+    - uriach
+    - almirall
+    - lacer
+    - cocunat
+    - freshly
+    - sepai
+    - byly
+    - instituto espanol
+    - perfumerias julia
+    - newflag
+    - olistic
+    - babe
+    - mustela
+    - aesop
+    - lush
+    - the body shop
+    - yves rocher
+    - unilever
+    - procter
+    - p&g
+  palabras_moda:
+    - moda
+    - fashion
+    - textil
+    - textile
+    - apparel
+    - ropa
+    - roba
+    - prendas
+    - garment*
+    - calzado
+    - footwear
+    - shoes
+    - sneakers
+    - zapatos
+    - zapatillas
+    - accesorios
+    - accessories
+    - complementos
+    - joyeria
+    - jewelry
+    - jewellery
+    - bolsos
+    - handbags
+    - bags
+    - leather goods
+    - marroquineria
+    - moda de lujo
+    - luxury fashion
+    - luxury brand
+    - retail de moda
+    - fashion retail
+    - streetwear
+    - lenceria
+    - lingerie
+    - denim
+    - bridal
+    - nupcial
+    - novias
+    - swimwear
+    - bano
+    - menswear
+    - womenswear
+    - kidswear
+    - moda infantil
+    - prenda
+    - coleccion*
+    - collection*
+    - wholesale
+    - showroom
+  palabras_belleza:
+    - belleza
+    - bellesa
+    - beauty
+    - cosmetica
+    - cosmetic*
+    - cosmetics
+    - perfumeria
+    - perfum*
+    - fragrance*
+    - fragancia*
+    - skincare
+    - skin care
+    - dermocosmetic*
+    - dermocosmetica
+    - dermatolog*
+    - farmacocosmetica
+    - maquillaje
+    - makeup
+    - make-up
+    - cuidado de la piel
+    - haircare
+    - hair care
+    - cuidado personal
+    - personal care
+    - parafarmacia
+    - pharmacy
+    - farmacia
+    - wellness
+
+# ---------------------------------------------------------------------
+# VERSIONES DE CV. "reglas": se aplica la PRIMERA que coincida.
+# Condiciones posibles (todas opcionales; si pones varias, deben cumplirse
+# todas):
+#   area: [lista de áreas]      sector: Moda | Belleza
+#   idioma: es | en              graduate: true | false
+#   titulo: [palabras en el título]
+# ---------------------------------------------------------------------
+cv:
+  versiones:
+    1: "Digital Content Graduate (EN)"
+    2: "Marketing Digital – Marca y Contenido (EN)"
+    3: "Marketing Digital – Marca y Contenido (ES)"
+    4: "Trade Marketing (ES)"
+    5: "Iberia Trade Graduate / Marketing de Marca (ES)"
+    6: "CV general (EN)"
+  reglas:
+    - si: {graduate: true, sector: Belleza, idioma: es}
+      cv: 5
+    - si: {graduate: true, area: [Trade Marketing], idioma: es}
+      cv: 5
+    - si: {area: [Trade Marketing], idioma: es}
+      cv: 4
+    - si: {area: [Trade Marketing], idioma: en}
+      cv: 4
+      nota: "Oferta en inglés: tu CV de Trade Marketing está en español. Alternativa: el 2."
+    - si: {graduate: true, sector: Belleza, idioma: en}
+      cv: 2
+      nota: "Alternativa: el 5 si el puesto es de brand marketing en Iberia."
+    - si: {graduate: true, idioma: es}
+      cv: 5
+    - si: {graduate: true, area: [Comunicación/Contenido, E-commerce], idioma: en}
+      cv: 1
+    - si: {graduate: true, idioma: en}
+      cv: 2
+    - si: {area: [Comunicación/Contenido], titulo: [content, contenido, social, redes, tiktok, copy, storytelling, creator, community], idioma: en}
+      cv: 1
+    - si: {area: [Comunicación/Contenido], titulo: [content, contenido, social, redes, tiktok, copy, storytelling, creator, community], idioma: es}
+      cv: 3
+    - si: {area: [E-commerce], idioma: en}
+      cv: 1
+    - si: {area: [E-commerce], idioma: es}
+      cv: 3
+    - si: {area: [Marketing], sector: Belleza, idioma: es, titulo: [brand, marca, marketing]}
+      cv: 5
+    - si: {area: [Marketing], idioma: en}
+      cv: 2
+    - si: {area: [Marketing], idioma: es}
+      cv: 3
+    - si: {area: [PR]}
+      cv: 6
+    - si: {area: [Comunicación/Contenido], idioma: es}
+      cv: 3
+    - si: {area: [Compras]}
+      cv: 6
+  por_defecto: 6
+
+# ---------------------------------------------------------------------
+# AVISOS POR TELEGRAM
+# ---------------------------------------------------------------------
+telegram:
+  # Solo se avisa de ofertas publicadas en los últimos N días
+  max_dias_antiguedad: 7
+  # Ofertas con estos avisos NO se envían por Telegram (solo aparecen en
+  # la web). Valores posibles: experiencia, jornada, idioma.
+  # Elegiste "Ninguna, solo en la web" → no se envían las que tengan avisos.
+  no_enviar_si_aviso: [experiencia, jornada, idioma]
+  # Máximo de mensajes por revisión (el resto se envía en la siguiente)
+  max_por_revision: 25
