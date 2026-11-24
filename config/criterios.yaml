@@ -340,6 +340,7 @@ nivel:
     - graduate
     - entry level
     - entry-level
+    - community manager     # suele ser un puesto junior
   # Se descartan las ofertas que pidan MÁS de estos años de experiencia.
   max_anos_experiencia: 3
 
