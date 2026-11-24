@@ -1,8 +1,8 @@
 {
  "config": {
   "last_error": "",
-  "last_ok": "2026-11-24T09:01:34.593651+00:00",
-  "last_run": "2026-11-24T09:01:34.593651+00:00",
+  "last_ok": "2026-11-24T09:37:05.966414+00:00",
+  "last_run": "2026-11-24T09:37:05.966414+00:00",
   "meta": {
    "areas": [
     "Trade Marketing",
@@ -75,10 +75,10 @@
     "The Fashion Hub (Moøde)",
     "Santa Eulalia"
    ],
-   "enviadas_ultima": 0,
+   "enviadas_ultima": 1,
    "hash": "a80c03cd761f"
   },
-  "runs": 20,
+  "runs": 21,
   "source": "config"
  },
  "empresa:Almirall": {
@@ -270,6 +270,16 @@
   },
   "runs": 19,
   "source": "empresas"
+ },
+ "fashionjobs": {
+  "last_error": "",
+  "last_ok": "2026-11-24T09:37:05.966414+00:00",
+  "last_run": "2026-11-24T09:37:05.966414+00:00",
+  "meta": {
+   "ultimas_ofertas": 114
+  },
+  "runs": 1,
+  "source": "fashionjobs"
  },
  "gmail": {
   "last_error": "",

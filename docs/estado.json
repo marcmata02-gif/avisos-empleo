@@ -1,7 +1,7 @@
 {
  "config": {
   "last_error": "",
-  "last_run": "2026-11-24T09:01:34.593651+00:00",
+  "last_run": "2026-11-24T09:37:05.966414+00:00",
   "meta": {
    "areas": [
     "Trade Marketing",
@@ -74,7 +74,7 @@
     "The Fashion Hub (Moøde)",
     "Santa Eulalia"
    ],
-   "enviadas_ultima": 0,
+   "enviadas_ultima": 1,
    "hash": "a80c03cd761f"
   }
  },
@@ -209,6 +209,13 @@
   "last_run": "2026-11-24T08:29:19.469629+00:00",
   "meta": {
    "ultimas_ofertas": 543
+  }
+ },
+ "fashionjobs": {
+  "last_error": "",
+  "last_run": "2026-11-24T09:37:05.966414+00:00",
+  "meta": {
+   "ultimas_ofertas": 114
   }
  },
  "gmail": {
