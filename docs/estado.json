@@ -1,7 +1,7 @@
 {
  "config": {
   "last_error": "",
-  "last_run": "2026-11-24T08:29:19.469629+00:00",
+  "last_run": "2026-11-24T09:01:34.593651+00:00",
   "meta": {
    "areas": [
     "Trade Marketing",
@@ -20,6 +20,7 @@
     "6": "CV general (EN)"
    },
    "empresas_pendientes": [
+    "Inditex (Stradivarius, Bershka, Oysho, Massimo Dutti)",
     "Tous",
     "Rosa Clará",
     "Custo Barcelona",
@@ -74,7 +75,7 @@
     "Santa Eulalia"
    ],
    "enviadas_ultima": 0,
-   "hash": "55bf7d8adfc7"
+   "hash": "a80c03cd761f"
   }
  },
  "empresa:Almirall": {
@@ -208,6 +209,14 @@
   "last_run": "2026-11-24T08:29:19.469629+00:00",
   "meta": {
    "ultimas_ofertas": 543
+  }
+ },
+ "gmail": {
+  "last_error": "",
+  "last_run": "2026-11-24T09:01:34.593651+00:00",
+  "meta": {
+   "por_portal": {},
+   "ultimas_ofertas": 0
   }
  },
  "telegram": {
