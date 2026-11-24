@@ -255,6 +255,45 @@ graduate:
     - talent program*
     - future leaders
     - programa de talento
+  # Graduate programs de estas funciones NO te interesan (se descartan si su
+  # título no menciona además una de tus áreas).
+  excluir_funciones:
+    - logistics
+    - logistica
+    - supply chain
+    - law
+    - legal
+    - hr
+    - human resources
+    - recursos humanos
+    - finance
+    - finanzas
+    - controlling
+    - accounting
+    - audit
+    - tax
+    - analytics
+    - data
+    - technology
+    - tech
+    - it
+    - engineering
+    - engineer
+    - perfumery
+    - perfumeria
+    - r&d
+    - innovation lab
+    - operations
+    - operaciones
+    - service delivery
+    - office management
+    - executive support
+    - sustainability
+    - sostenibilidad
+    - procurement
+    - industrial
+    - quality
+    - manufacturing
 
 # ---------------------------------------------------------------------
 # NIVEL

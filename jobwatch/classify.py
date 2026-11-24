@@ -346,7 +346,11 @@ class Classifier:
         # Áreas
         areas = self.match_areas(tn)
         if not areas and ev.is_graduate:
-            areas = self.match_areas(dn[:4000])
+            excl = (self.c.get("graduate") or {}).get("excluir_funciones") or []
+            if has_kw(tn, excl):
+                ev.discard_reason = "Graduate program de otra función"
+                return ev
+            areas = self.match_areas(dn[:1500])
         if not areas:
             ev.discard_reason = "Fuera de tus áreas"
             return ev
@@ -407,6 +411,8 @@ class Classifier:
             return ev
         elif raw.implicit_fulltime:
             ev.jornada = "Jornada completa (filtro de la alerta)"
+        elif ev.is_graduate:
+            ev.jornada = "Jornada completa (graduate program)"
         else:
             ev.jornada = "Jornada no indicada"
             ev.flags.append("jornada")

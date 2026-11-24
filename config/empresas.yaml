@@ -79,12 +79,11 @@ empresas:
     alias: [inditex, stradivarius, bershka, oysho, massimo dutti, zara, pull&bear, lefties]
     sector: Moda
     tipo: Gran empresa
-    plataforma: html
-    url: https://www.inditexcareers.com/portalweb/es/
-    enlace_patron: "/offer/"
+    plataforma: pendiente
+    web: https://www.inditexcareers.com/portalweb/es/
     ubicacion: ""
-    estado: por_verificar
-    notas: "Stradivarius tiene sede en Sant Esteve Sesrovires. El portal es muy dinámico; sus ofertas de oficina también salen en InfoJobs y LinkedIn."
+    estado: pendiente
+    notas: "Su portal bloquea las lecturas automáticas (error 403). Stradivarius tiene sede en Sant Esteve Sesrovires; sus ofertas de oficina también salen en InfoJobs y LinkedIn."
 
   - nombre: Tous
     alias: [joyeria tous, tous jewelry]

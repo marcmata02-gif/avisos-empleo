@@ -188,3 +188,10 @@ def test_prelim():
     assert not C.prelim("Sales Associate")[0]
     assert not C.prelim("Software Engineer")[0]
     assert not C.prelim("Senior PR Manager")[0]
+
+
+def test_graduate_other_functions_and_jornada():
+    assert not ev("Logistics Graduate", "Puig", "Join our marketing-driven company. 1-year graduate contract.").passes
+    assert not ev("Employment Law & HR Compliance Graduate", "Puig", "Brand marketing environment.").passes
+    e = ev("Digital Content Graduate", "Puig", "Support our brands' digital content. 1-year contract.")
+    assert e.passes and e.jornada.startswith("Jornada completa") and not e.flags

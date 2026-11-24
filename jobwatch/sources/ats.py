@@ -231,7 +231,12 @@ def successfactors(x: Ctx) -> list[RawOffer]:
     for start in (0, 25, 50, 75):
         params = {"q": "", "locationsearch": x.c.get("buscar_ubicacion", "Barcelona"),
                   "sortColumn": "referencedate", "sortDirection": "desc", "startrow": start}
-        r = get(x.s, f"{base}/search/", params=params, timeout=x.timeout)
+        try:
+            r = get(x.s, f"{base}/search/", params=params, timeout=x.timeout)
+        except Exception:  # noqa: BLE001 - algunas webs SAP no tienen /search/
+            if start == 0:
+                return html_list(x, link_pattern="/job/")
+            break
         soup = BeautifulSoup(r.text, "html.parser")
         rows = soup.select("tr.data-row") or soup.select("li.job-tile") or []
         if not rows:
