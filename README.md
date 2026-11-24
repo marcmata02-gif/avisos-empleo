@@ -1,238 +1,42 @@
 # Avisos de empleo · Barcelona (moda y belleza)
 
-Esta app personal revisa ofertas de trabajo cada 30 minutos, se queda con las que encajan con tus criterios y te avisa por **Telegram**. Además tienes una **web privada** pensada para el móvil, donde puedes consultar las ofertas y marcarlas.
+Revisa ofertas cada 30 minutos, se queda con las que encajan con tus criterios y te avisa por **Telegram**.
 
-**Coste: 0 €.** Todo funciona con planes gratuitos:
+- **Web:** https://marcmata02-gif.github.io/avisos-empleo/ (pensada para el móvil; tus marcas y notas se guardan en el dispositivo donde las hagas)
+- **Coste:** 0 € (GitHub Actions + GitHub Pages + Telegram + Gmail)
 
-| Pieza | Servicio gratuito | Para qué |
-|---|---|---|
-| Revisión cada 30 min | GitHub Actions (repositorio **público** = minutos ilimitados) | Ejecuta la búsqueda |
-| Base de datos | Supabase (plan Free) | Guarda las ofertas y tus marcas |
-| Web | GitHub Pages | Lista de ofertas en el móvil |
-| Avisos | Bot de Telegram | Mensaje por cada oferta nueva |
-| LinkedIn, Indeed, FashionJobs, FashionUnited | Sus alertas por email → una cuenta de Gmail dedicada (IMAP) | Sin scraping |
-| InfoJobs, Adzuna | Sus API oficiales gratuitas | Búsquedas en la provincia de Barcelona |
-| Webs de empresas | Endpoints públicos (Greenhouse, Lever, Workable, Personio, Teamtailor, SuccessFactors, Workday, Factorial...) o lectura ligera | Ofertas en origen |
-
-> **Privacidad:** el repositorio es público, pero **no contiene tu perfil**. Solo están los criterios de búsqueda, los nombres de tus versiones de CV y la lista de empresas. Las claves van en "secretos" de GitHub. La web pide iniciar sesión y solo deja entrar a tu email. Ojo: los registros de ejecución de GitHub Actions de un repositorio público también son públicos. En ellos solo aparecen títulos de ofertas y contadores, nunca emails ni claves.
-
----
-
-## 1. Lo que no es posible (y la alternativa)
-
-- **"En cuanto se publiquen" en LinkedIn e Indeed.** La app no entra en LinkedIn ni en Indeed (como pediste). Depende de cuándo te envían ellos las alertas: normalmente una vez al día o en tandas. La app las lee en un máximo de 30 minutos después de que lleguen. Las fuentes que sí se consultan directamente cada 30 min son las webs de empresas, InfoJobs (cada hora, por prudencia con su cuota) y Adzuna (cada 4 h, por su cuota gratuita).
-- **Las alertas de LinkedIn e InfoJobs llegan al email de tu cuenta**, no al Gmail dedicado. Solución: un filtro de reenvío automático en tu email personal hacia el Gmail dedicado (paso 10). El reenvío conserva el remitente original, que es lo que la app necesita.
-- **GitHub Actions no es puntual.** Las tareas programadas pueden retrasarse entre 5 y 20 minutos en horas punta. Además, GitHub las desactiva si el repositorio pasa 60 días sin cambios. El propio flujo hace un commit vacío cada 45 días para evitarlo.
-- **RSS de FashionJobs.** No he encontrado un RSS público de ofertas, ni en FashionJobs ni en FashionUnited (solo de noticias). Por eso se usan sus alertas por email. Si encuentras un feed, añádelo en `config/fuentes.yaml` → `rss`.
-- **API de InfoJobs.** Es oficial y gratuita, pero InfoJobs no indica si sigue aceptando aplicaciones nuevas. Si no puedes registrarte, crea alertas de InfoJobs por email y reenvíalas al Gmail. La app ya las entiende ("InfoJobs (alerta)").
-- **Lectura de emails.** El formato de los emails de alertas puede cambiar sin aviso. Si un día dejan de llegar ofertas de un portal, mira "Estado de las fuentes" en la web y avísame (o abre un *issue*).
-- **Webs de empresas no comprobadas en vivo.** No he podido conectarme a ellas desde mi entorno. Están escritas siguiendo el formato público de cada plataforma, y algunas (Puig, Pronovias, Meller, Veepee) las he consultado por otra vía. Haz la **revisión de prueba** del paso 9: te dirá qué empresas funcionan y cuáles dan error.
-- **Datos que la oferta no trae.** Las ofertas que llegan por email traen poco texto, así que ahí "Qué piden", salario o idioma suelen salir vacíos. Si la misma oferta aparece también en InfoJobs o en la web de la empresa, se fusionan y se completa.
-- **Supabase Free** pausa los proyectos inactivos una semana. Como la app escribe cada 30 minutos, nunca llega a estar inactivo.
-
----
-
-## 2. Qué hace exactamente
-
-1. Cada 30 min, GitHub Actions ejecuta `python -m jobwatch.main`.
-2. Lee las fuentes que tocan según `config/fuentes.yaml`.
-3. **Une duplicados.** La misma oferta en varios portales (misma empresa y mismo puesto, aunque cambie "(H/M)", "- Barcelona" o "S.L.") queda como **una sola oferta con todos sus enlaces**. El primero es el de la web de la empresa, después InfoJobs, LinkedIn, Indeed...
-4. **Filtra** con `config/criterios.yaml`: área, sector, nivel, jornada, prácticas, tienda, ubicación, años de experiencia, idiomas.
-5. **Etiqueta** cada oferta con área y sector, avisos (nivel, idioma, jornada no indicada), CV recomendado, resumen de una línea, requisitos y salario.
-6. **Avisa por Telegram** de las ofertas nuevas, destacando 🎓 graduate programs y 👗 moda:
-   - Solo se avisa una vez por oferta (queda registrado en la base de datos).
-   - Las ofertas con algún aviso ("Puede pedir más experiencia", "Jornada no indicada", "Exige francés"...) **solo aparecen en la web**, como elegiste.
-   - Solo se avisa de ofertas de los últimos 7 días. El primer día no te llegará una avalancha.
-7. Guarda todo en Supabase para la web.
-
-### La web
-- Lista de la más reciente a la más antigua, con "hace X h". Las de moda llevan borde granate y los graduate programs, azul.
-- Pestañas Nuevas / Guardadas / Aplicadas / Descartadas / Todas.
-- Buscador, filtros por área, sector, empresa y portal, y "Solo graduate programs".
-- Al marcar **Aplicada** puedes elegir **con qué CV aplicaste** y añadir notas.
-- "Ver las que descartó el filtro" enseña lo que se ha quedado fuera en los últimos 30 días y el motivo. Sirve para ajustar los criterios.
-- "Estado de las fuentes" (al final) muestra la última revisión de cada fuente, sus errores y las empresas pendientes de configurar.
-
-### Recomendación de CV (en `criterios.yaml` → `cv.reglas`)
-| Situación | CV |
+## Cómo funciona
+| Fuente | Cómo llega |
 |---|---|
-| Graduate program de belleza o de trade, en español | 5 · Iberia Trade Graduate / Marketing de Marca |
-| Trade marketing, retail marketing, activación | 4 · Trade Marketing (si la oferta es en inglés, te lo indica y sugiere el 2) |
-| Graduate program en inglés | 1 (si es de contenido o e-commerce) o 2 |
-| Contenido, redes sociales, storytelling, e-commerce | 1 en inglés · 3 en español |
-| Brand marketing de belleza en español | 5 |
-| Marketing digital, marca | 2 en inglés · 3 en español |
-| PR, prensa, influencers, compras, ofertas mixtas | 6 · CV general |
+| Webs de empleo de ~15 empresas (Puig, Pronovias, Veepee, Revlon, Meller, Nude Project…) | La app las lee directamente cada 30 min |
+| LinkedIn | 8 alertas diarias → email a marcmata02@gmail.com → la app lo lee |
+| Indeed, FashionJobs, FashionUnited, InfoJobs (opcional) | Crea alertas que lleguen a marcmata02@gmail.com y la app las leerá solas |
+| InfoJobs y Adzuna por API (opcional) | Añade sus claves como secretos (`INFOJOBS_CLIENT_ID`, `INFOJOBS_CLIENT_SECRET`, `ADZUNA_APP_ID`, `ADZUNA_APP_KEY`) |
 
-El idioma de la oferta se detecta automáticamente. Se aplica la primera regla que coincide y puedes cambiarlas.
+Las ofertas se guardan en la carpeta `datos/` del repositorio y la web lee `docs/ofertas.json`.
 
----
+**Telegram:** te avisa una sola vez por oferta, solo de las publicadas en los últimos 7 días y solo de las que no llevan avisos ("Puede pedir más experiencia", "Jornada no indicada" o un idioma exigido). Las que llevan avisos se ven en la web.
 
-## 3. Puesta en marcha paso a paso
+**Secretos configurados en GitHub:** `TELEGRAM_BOT_TOKEN`, `GMAIL_USER` y `GMAIL_APP_PASSWORD`. Se cambian en Settings → Secrets and variables → Actions.
 
-Necesitas unos 60-90 minutos la primera vez. No hace falta saber programar: todo se hace desde el navegador.
+## Cambiar criterios
+Abre en GitHub el archivo de la carpeta `config/`, pulsa el **lápiz ✏️**, haz el cambio y pulsa **Commit changes**. Se aplica en la siguiente revisión.
+- `config/criterios.yaml`: áreas, palabras clave, descartes, nivel, idiomas, sectores, reglas de CV y opciones de Telegram.
+- `config/empresas.yaml`: empresas y sus páginas de empleo. El archivo explica cómo añadir una.
+- `config/fuentes.yaml`: frecuencias y búsquedas.
 
-### Paso 1 · Crear el repositorio en GitHub y subir el código
-1. Crea una cuenta en <https://github.com> (gratis) si no la tienes.
-2. Arriba a la derecha, **+ → New repository**. Nombre: `avisos-empleo` (o el que quieras). Marca **Public**. Pulsa **Create repository**.
-3. Descomprime el zip que te he dado. En la página del repositorio pulsa **uploading an existing file** y arrastra **todo el contenido** de la carpeta (no la carpeta en sí).
-   - ⚠️ La carpeta `.github` empieza por punto y está oculta. En Mac, en Finder pulsa `Cmd + Shift + .` para verla. En Windows: Explorador → Vista → Mostrar → Elementos ocultos. Sin esa carpeta no hay revisión automática.
-4. Pulsa **Commit changes**.
-5. Comprueba que en el repositorio ves las carpetas `.github`, `config`, `jobwatch`, `supabase`, `web` y `tests`.
-
-### Paso 2 · Crear el bot de Telegram
-1. En Telegram busca **@BotFather** (con la marca azul de verificado) y escríbele `/newbot`.
-2. Te pide un nombre (p. ej. `Mis ofertas BCN`) y un usuario que termine en `bot` (p. ej. `ofertas_bcn_ana_bot`).
-3. BotFather te da un **token** del tipo `123456789:AAH...`. Guárdalo: es `TELEGRAM_BOT_TOKEN`.
-4. Abre el chat con tu bot nuevo y pulsa **Iniciar** (o escríbele "hola").
-5. En el navegador abre `https://api.telegram.org/botTU_TOKEN/getUpdates`, cambiando `TU_TOKEN` por el token. Busca `"chat":{"id":` seguido de un número, p. ej. `"chat":{"id":987654321`. Ese número es `TELEGRAM_CHAT_ID`.
-   - Si sale `"result":[]`, vuelve a escribir al bot y recarga la página.
-
-### Paso 3 · Crear la base de datos (Supabase)
-1. Entra en <https://supabase.com> → **Start your project**. Regístrate (puedes hacerlo con tu cuenta de GitHub).
-2. **New project**. Nombre: `avisos-empleo`. Inventa una contraseña de base de datos (no la usarás). Región: **Europe (Frankfurt o Ireland)**. Plan **Free**.
-3. Cuando esté listo, menú izquierdo → **SQL Editor** → **New query**. Pega **todo** el contenido del archivo `supabase/schema.sql` y pulsa **Run**. Debe decir *Success*.
-4. Menú → **Project Settings** (engranaje) → **API Keys**:
-   - **Publishable key** (`sb_publishable_...`) → `SUPABASE_PUBLISHABLE_KEY` (puede ser pública: la usa la web).
-   - **Secret key** (`sb_secret_...`, pulsa "Reveal" o "Create new secret key") → `SUPABASE_SECRET_KEY`. **Nunca la compartas.**
-5. **Project Settings → Data API** (o la pestaña "General"): copia la **Project URL**, del tipo `https://abcdefgh.supabase.co`. Es `SUPABASE_URL`.
-
-### Paso 4 · Permitir solo tu acceso a la web
-1. En Supabase → **Authentication → Users → Add user → Create new user**. Pon tu email personal (el que usarás para entrar en la web), marca *Auto Confirm User* y pulsa crear. La contraseña da igual: entrarás con un enlace por email.
-2. **SQL Editor → New query**, pega esto (con tu email) y pulsa **Run**:
-   ```sql
-   insert into public.allowed_users (email) values ('TU_EMAIL_PERSONAL@ejemplo.com');
-   ```
-3. **Authentication → Sign In / Providers**: desactiva **Allow new users to sign up**. Así nadie más puede registrarse.
-4. **Authentication → URL Configuration**: en **Site URL** pon la dirección de tu web, `https://TU_USUARIO_GITHUB.github.io/avisos-empleo/`. Añade esa misma dirección en **Redirect URLs**. Si tu repositorio se llama distinto, cambia `avisos-empleo`.
-
-### Paso 5 · Gmail dedicado para las alertas
-1. Crea una cuenta nueva de Gmail, p. ej. `ofertas.bcn.tunombre@gmail.com`.
-2. Activa la verificación en dos pasos: <https://myaccount.google.com/security> → **Verificación en dos pasos**. Es obligatoria para lo siguiente.
-3. Crea una **contraseña de aplicación** en <https://myaccount.google.com/apppasswords>. Nombre: `avisos-empleo`. Google te da 16 letras: es `GMAIL_APP_PASSWORD` (quita los espacios). El email es `GMAIL_USER`.
-4. El acceso IMAP de Gmail viene activado. Si en Gmail → ⚙️ → Ver todos los ajustes → *Reenvío y correo POP/IMAP* ves una opción "Habilitar IMAP", márcala.
-5. La app pone la etiqueta `ofertas-procesadas` a cada email que ya ha leído. No hace falta que borres nada.
-
-### Paso 6 · Claves de InfoJobs y Adzuna
-**InfoJobs**
-1. Entra en <https://developer.infojobs.net> e inicia sesión con tu cuenta de InfoJobs (o crea una).
-2. Ve a **Mis aplicaciones / Registrar aplicación**. Nombre: `avisos-empleo`. Uso: personal. Si te pide una URL de callback, pon `https://localhost`.
-3. Copia el **Client ID** → `INFOJOBS_CLIENT_ID` y el **Client Secret** → `INFOJOBS_CLIENT_SECRET`.
-4. Si no te deja registrar la aplicación, sáltate este paso y crea alertas de InfoJobs por email (paso 10). La app sigue funcionando.
-
-**Adzuna**
-1. Regístrate en <https://developer.adzuna.com> (**Register**, gratis y sin tarjeta).
-2. En el panel (**Dashboard / API access details**) verás **Application ID** → `ADZUNA_APP_ID` y **Application Key** → `ADZUNA_APP_KEY`.
-3. La configuración usa unas 24 llamadas al día, por debajo de la cuota gratuita.
-
-### Paso 7 · Guardar las claves en GitHub (secretos)
-En tu repositorio: **Settings → Secrets and variables → Actions → New repository secret**. Crea uno por fila; el nombre debe ser exacto:
-
-| Nombre | Valor |
-|---|---|
-| `SUPABASE_URL` | Project URL (paso 3) |
-| `SUPABASE_SECRET_KEY` | Secret key `sb_secret_...` |
-| `SUPABASE_PUBLISHABLE_KEY` | Publishable key `sb_publishable_...` |
-| `TELEGRAM_BOT_TOKEN` | token del bot (paso 2) |
-| `TELEGRAM_CHAT_ID` | número del chat (paso 2) |
-| `GMAIL_USER` | el Gmail dedicado |
-| `GMAIL_APP_PASSWORD` | las 16 letras (paso 5) |
-| `INFOJOBS_CLIENT_ID` | (si lo tienes) |
-| `INFOJOBS_CLIENT_SECRET` | (si lo tienes) |
-| `ADZUNA_APP_ID` | Application ID |
-| `ADZUNA_APP_KEY` | Application Key |
-
-Después, en la pestaña **Variables** de esa misma pantalla → **New repository variable**: nombre `WEB_URL`, valor `https://TU_USUARIO_GITHUB.github.io/avisos-empleo/`. Sirve para el botón "Ver en la web" de Telegram.
-
-Si alguna fuente no tiene sus claves, simplemente se salta.
-
-### Paso 8 · Publicar la web
-1. **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-2. Pestaña **Actions**. Si ves un aviso para activar los workflows, pulsa **I understand my workflows, go ahead and enable them**.
-3. A la izquierda elige **Publicar web** → **Run workflow** → **Run workflow**. En 1-2 min estará en `https://TU_USUARIO_GITHUB.github.io/avisos-empleo/`.
-4. Ábrela en el móvil, pon tu email y pulsa el enlace que te llega. Ábrelo en el mismo móvil. Si quieres, en Safari o Chrome usa "Añadir a pantalla de inicio".
-
-### Paso 9 · Probar y arrancar
-En **Actions → Buscar ofertas → Run workflow**:
-1. Modo **probar-telegram** → te llega "✅ Bot de ofertas conectado".
-2. Modo **prueba** → no guarda ni avisa. Abre la ejecución → *buscar* → *Revisar fuentes* y verás:
-   - una línea por fuente y empresa (`OK` o `ERROR` con el motivo);
-   - las ofertas que pasarían el filtro (✔ con sector, área y CV);
-   - un resumen de motivos de descarte.
-   Si una empresa da error, cambia su `plataforma` a `pendiente` en `config/empresas.yaml` o corrige la dirección.
-3. Modo **normal** → primera revisión real. Desde ahí se ejecuta sola cada 30 minutos.
-
-### Paso 10 · Crear las alertas de empleo
-Todas apuntan al **Gmail dedicado**, directamente o reenviadas. Incluye "moda"/"fashion" o "belleza"/"beauty" en las palabras clave siempre que puedas: la app usa el asunto del email para saber el sector cuando la empresa es desconocida.
-
-**Reenvío desde tu email personal** (LinkedIn e InfoJobs envían las alertas al email de tu cuenta). En tu Gmail personal:
-1. ⚙️ → Ver todos los ajustes → **Reenvío y correo POP/IMAP** → **Añadir una dirección de reenvío**. Pon el Gmail dedicado y confirma el código que llega allí.
-2. **Filtros y direcciones bloqueadas → Crear un filtro**. En *De* pon `jobalerts-noreply@linkedin.com OR jobs-noreply@linkedin.com OR infojobs.net`. Luego **Crear filtro** → **Reenviar a** el Gmail dedicado (opcional: *Omitir Recibidos*).
-
-Si tu email personal es Outlook: Configuración → Correo → Reglas → nueva regla con "Redirigir a". Usa *redirigir*, no *reenviar*, para que se mantenga el remitente.
-
-**LinkedIn** (Empleos → busca → activa **Crear alerta**). En todas: Ubicación `Barcelona, Cataluña, España`. Filtros: **Tipo de empleo: Jornada completa**; **Nivel de experiencia: Sin experiencia + Algo de responsabilidad** (no marques Prácticas). Frecuencia: la más alta que te ofrezca (diaria), con notificación por email.
-
-| # | Palabras clave (cópialas tal cual) |
-|---|---|
-| 1 | `(marketing OR brand) AND (moda OR fashion OR lujo OR luxury)` |
-| 2 | `"trade marketing" OR "retail marketing" OR "brand activation" OR "shopper marketing"` |
-| 3 | `(comunicación OR communications OR content OR contenido OR "social media") AND (moda OR fashion)` |
-| 4 | `(PR OR "relaciones públicas" OR "press office" OR influencer OR showroom) AND (moda OR fashion OR beauty)` |
-| 5 | `(buyer OR "assistant buyer" OR merchandiser OR compras OR "merchandise planner") AND (moda OR fashion)` |
-| 6 | `(ecommerce OR "e-commerce" OR "online merchandiser" OR marketplace) AND (moda OR fashion)` |
-| 7 | `(graduate OR trainee OR "early careers") AND (marketing OR brand OR fashion OR beauty)` |
-| 8 | `(marketing OR "trade marketing" OR communications OR PR OR ecommerce) AND (beauty OR belleza OR cosmetics OR cosmética OR skincare OR fragrance)` |
-
-**Indeed** (<https://es.indeed.com>). Busca *Qué* = la frase, *Dónde* = `Barcelona, Barcelona provincia`. Aplica el filtro **Tipo de jornada → Jornada completa** y pulsa **Recibir empleos nuevos por email** con el **Gmail dedicado** (en Indeed no hace falta reenvío).
-
-| # | Qué |
-|---|---|
-| 1 | `marketing moda` |
-| 2 | `fashion marketing` |
-| 3 | `trade marketing` |
-| 4 | `comunicación moda` |
-| 5 | `social media moda` |
-| 6 | `relaciones públicas moda` |
-| 7 | `buyer moda` |
-| 8 | `ecommerce moda` |
-| 9 | `graduate marketing` |
-| 10 | `marketing cosmética` |
-| 11 | `marketing belleza` |
-
-**FashionJobs** (<https://es.fashionjobs.com>). Crea una cuenta **con el Gmail dedicado** y crea alertas con Ubicación **Barcelona** para las categorías **Marketing / Comunicación**, **Compras / Producto** y **E-commerce / Digital**. Si deja palabras clave, añade una con `graduate` y otra con `PR`.
-
-**FashionUnited** (<https://fashionunited.es/ofertas-trabajo-moda>). Filtra por **Barcelona** y por las categorías de marketing, comunicación, compras y e-commerce. Pulsa **Crear alerta** con el Gmail dedicado.
-
-**InfoJobs** (solo si no tienes la API). Crea alertas con estas búsquedas: `marketing moda`, `trade marketing`, `comunicación moda`, `compras moda`, `ecommerce moda` y `marketing cosmética`. Filtros: provincia **Barcelona** y **Jornada completa**. Reenvía las alertas con el filtro de arriba.
-
----
-
-## 4. Editar los criterios sin tocar el código
-Todo está en la carpeta `config/`. En GitHub abre el archivo, pulsa el **lápiz ✏️**, cambia lo que quieras y pulsa **Commit changes**. En la siguiente revisión se aplica y se re-evalúan las ofertas de los últimos 30 días.
-
-- `config/criterios.yaml`: áreas y sus palabras (en castellano, catalán e inglés), graduate programs, nivel (descartes y aviso de "manager"), máximo de años de experiencia (3), idiomas con aviso, descartes de tienda, comerciales, laboratorio, prácticas y jornada (en el **título**), excepciones (p. ej. "online store"), sectores y marcas conocidas, reglas de CV y opciones de Telegram.
-- `config/fuentes.yaml`: frecuencia de cada fuente, búsquedas de InfoJobs y Adzuna, y feeds RSS.
-- `config/empresas.yaml`: la lista de empresas. Para añadir una, copia un bloque. El propio archivo explica cómo saber su plataforma mirando la dirección de una oferta.
-
-Reglas importantes que ya están implementadas:
-- Las palabras de tienda (dependiente, store manager, beauty advisor...) solo se miran en el **título**. Un puesto de trade marketing que habla de "activaciones en tienda" pasa.
-- Un **graduate program** se mantiene aunque sea un contrato de 1 año o el título diga "Head of ... Graduate", pero no si es beca o prácticas con convenio.
-- "Manager" sin "junior" ni "assistant" → aviso **Puede pedir más experiencia**.
-- Más de 3 años de experiencia pedidos → descartada. Se detectan frases como "5+ years", "mínimo 4 años", "3-5 años" (aquí cuenta el mínimo) o "al menos 4 años".
-- Idioma distinto de castellano, catalán o inglés exigido → aviso. Si dice "valorable" o "a plus", no hay aviso.
-- Jornada no indicada → aviso. En las alertas de LinkedIn e Indeed se asume jornada completa porque las creas con ese filtro.
-- Contratos temporales y sustituciones (maternity cover) se descartan, excepto en graduate programs. Si quieres verlos, cambia `descartar_contrato_temporal: false`.
-- Compras solo cuenta en moda. Belleza solo en marketing, trade marketing, comunicación, PR, contenido y e-commerce.
-
----
+## Probar a mano
+Actions → **Buscar ofertas** → **Run workflow**. Modos:
+- `normal`: hace una revisión completa.
+- `prueba`: muestra lo que encontraría, sin guardar ni avisar.
+- `probar-telegram`: envía un mensaje de prueba al bot.
 
 ## 5. Lista de empresas (para que la revises)
 70 empresas con oficinas en Barcelona y alrededores. Las 4 categorías que pediste están cubiertas: moda grande y mediana, moda pequeña, emergente, sostenible y nativa digital, belleza y cosmética, y agencias de PR, showrooms y distribuidores.
 
 - ✅ **configurada**: su plataforma está confirmada y la app lee su página de empleo.
 - 🟡 **configurada, por confirmar**: la app intenta leerla; la revisión de prueba te dirá si funciona.
-- ⚪ **sin confirmar**: no he podido confirmar su página de empleo. La app no la consulta y sus ofertas llegan por LinkedIn, Indeed e InfoJobs. Muchas marcas pequeñas (Brava Fabrics, Thinking Mu, Lefrik...) no tienen página de empleo propia y publican solo en LinkedIn o en sus redes. Cuando encuentres la de alguna, cambia `plataforma` siguiendo las instrucciones de `empresas.yaml`. La web te muestra siempre la lista de pendientes.
+- ⚪ **sin confirmar**: no he podido confirmar su página de empleo. La app no la consulta y sus ofertas llegan por LinkedIn, Indeed e InfoJobs. Muchas marcas pequeñas (Brava Fabrics, Thinking Mu, Lefrik...) no tienen página de empleo propia y publican solo en LinkedIn o en sus redes. Cuando encuentres la de alguna, cambia `plataforma` siguiendo las instrucciones de `empresas.yaml`. La web (al final, "Estado de las fuentes") muestra la lista de pendientes.
 
 | Empresa | Sector | Tipo | Plataforma | Estado |
 |---|---|---|---|---|
@@ -310,18 +114,11 @@ Ideas para seguir ampliando la lista: las marcas de 080 Barcelona Fashion y del 
 
 ---
 
-## 6. Problemas frecuentes
+## Problemas frecuentes
 | Problema | Solución |
 |---|---|
-| No llega nada a Telegram | Ejecuta el modo `probar-telegram`. Si falla, revisa `TELEGRAM_BOT_TOKEN` y `TELEGRAM_CHAT_ID` y que hayas escrito al bot. Recuerda que las ofertas con avisos solo van a la web. |
-| `[gmail] ERROR ... AUTHENTICATIONFAILED` | La contraseña de aplicación está mal o falta la verificación en dos pasos. |
-| La web dice "Error al cargar" | No has añadido tu email en `allowed_users` (paso 4.2) o has entrado con otro email. |
-| El enlace del email de acceso no funciona | Revisa la *Site URL* y las *Redirect URLs* (paso 4.4) y ábrelo en el mismo navegador donde lo pediste. |
-| Una empresa da ERROR cada vez | Su web ha cambiado. Pon `plataforma: pendiente` o corrige la `url`. |
-| Demasiadas o muy pocas ofertas | Mira "Ver las que descartó el filtro" en la web y ajusta las palabras en `criterios.yaml`. |
-| Se ha desactivado la revisión automática | Actions → Buscar ofertas → **Enable workflow**. |
-
-## 7. Para quien sepa programar
-- `python -m jobwatch.main --prueba [--fuente infojobs|adzuna|gmail|empresas|<empresa>]`
-- Pruebas: `pip install -r requirements.txt pytest && pytest`. Son 30 pruebas sin red (filtros, emails, plataformas y el flujo completo con base de datos simulada).
-- Código: `jobwatch/classify.py` (filtros), `jobwatch/dedupe.py` (duplicados), `jobwatch/sources/` (fuentes), `jobwatch/main.py` (flujo), `web/` (web estática con supabase-js).
+| No llega nada a Telegram | Ejecuta el modo `probar-telegram`. Recuerda que las ofertas con avisos solo aparecen en la web. |
+| `[gmail] ERROR` | La contraseña de aplicación ha cambiado o se ha revocado: crea otra y actualiza el secreto `GMAIL_APP_PASSWORD`. |
+| Una empresa da error | En la web, mira "Estado de las fuentes". Si su página ha cambiado, pon `plataforma: pendiente` en `empresas.yaml`. |
+| Demasiadas o muy pocas ofertas | Activa "Ver las que descartó el filtro" en la web y ajusta `criterios.yaml`. |
+| GitHub dice que ha desactivado la tarea programada | Actions → Buscar ofertas → **Enable workflow**. |
