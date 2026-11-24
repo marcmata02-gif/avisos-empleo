@@ -20,7 +20,7 @@ from .classify import Classifier
 from .config import Config, load_config
 from .dedupe import canonical_url, fingerprint
 from .models import Evaluated, RawOffer
-from .sources import ats, adzuna, infojobs, rss
+from .sources import ats, adzuna, fashionjobs, infojobs, rss
 from .sources.gmail_alerts import GmailSource, resolve_redirects
 from .text import norm
 
@@ -195,7 +195,7 @@ def run(args) -> int:
         if not conf.get("activa", True):
             return False
         if only:
-            return only == key or (key == "empresas" and only not in {"gmail", "infojobs", "adzuna", "rss"})
+            return only == key or (key == "empresas" and only not in {"gmail", "infojobs", "adzuna", "rss", "fashionjobs"})
         return is_due(states.get(key), int(conf.get("cada_minutos", 30)), now)
 
     def record(key: str, ok: bool, n: int, err: str = "", meta: dict | None = None):
@@ -263,6 +263,15 @@ def run(args) -> int:
             record("rss", True, len(found))
         except Exception as e:  # noqa: BLE001
             record("rss", False, 0, f"{type(e).__name__}: {e}")
+
+    # ---------------- FashionJobs (páginas públicas de Barcelona)
+    if want("fashionjobs"):
+        try:
+            found = fashionjobs.fetch(F.get("fashionjobs") or {}, clf.prelim, known_urls)
+            collected += found
+            record("fashionjobs", True, len(found))
+        except Exception as e:  # noqa: BLE001
+            record("fashionjobs", False, 0, f"{type(e).__name__}: {e}")
 
     # ---------------- Empresas
     if want("empresas"):

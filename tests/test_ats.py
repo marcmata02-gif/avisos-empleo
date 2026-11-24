@@ -110,3 +110,29 @@ def test_teamtailor_rss(monkeypatch):
     assert out[0].location == "El Prat de Llobregat" and out[0].modality == "Híbrido"
     e = C.evaluate(out[0])
     assert e.passes, e.discard_reason
+
+
+def test_fashionjobs(monkeypatch):
+    import jobwatch.sources.fashionjobs as FJ
+    listing = """<a class="extended-link" href="https://es.fashionjobs.com/empleo/rivera/Shop-assistant-barcelona,12385317.html" title="Shop Assistant Barcelona (40 Horas Semanales)">x</a>
+    <a href="https://es.fashionjobs.com/empleo/max-mara-espana-slu/Marketing-assistant,12300001.html" title="Marketing Assistant">y</a>"""
+    jl = {"@type": "JobPosting", "title": "Marketing Assistant", "hiringOrganization": {"name": "Max Mara"},
+          "description": "We are looking for a Marketing Assistant for our fashion brand. Full time.",
+          "datePosted": "2026-11-23", "employmentType": "FULL_TIME",
+          "jobLocation": {"address": {"addressLocality": "Barcelona", "addressRegion": "Cataluña"}}}
+    detail = f'<script type="application/ld+json">{json.dumps(jl)}</script>'
+    calls = []
+
+    def fake_get(s, url, **k):
+        calls.append(url)
+        if "12300001" in url:
+            return R(text=detail)
+        return R(text=listing if url.endswith("4334.html") else "")
+    monkeypatch.setattr(FJ, "get", fake_get)
+    out = FJ.fetch({"paginas": 3}, C.prelim, set())
+    assert len(out) == 2 and sum("12385317" in c for c in calls) == 0   # la de tienda no abre detalle
+    good = [o for o in out if "12300001" in o.url][0]
+    assert good.company == "Max Mara" and good.location.startswith("Barcelona")
+    e = C.evaluate(good)
+    assert e.passes and e.sector == "Moda" and not e.flags
+    assert not C.evaluate([o for o in out if "12385317" in o.url][0]).passes

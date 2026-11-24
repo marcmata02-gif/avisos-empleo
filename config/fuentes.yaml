@@ -67,6 +67,15 @@ adzuna:
     - {todas: cosmetica, alguna: "marketing comunicacion pr ecommerce trade contenido social brand graduate"}
     - {todas: beauty, alguna: "marketing communications pr ecommerce trade content social brand graduate"}
 
+# FashionJobs: lectura de sus páginas públicas de ofertas de la provincia de
+# Barcelona (sin cuenta ni alertas). Su robots.txt permite estas páginas.
+fashionjobs:
+  activa: true
+  cada_minutos: 30
+  listado: /provincia/Barcelona,4334
+  paginas: 4          # ~20 ofertas por página, de la más reciente a la más antigua
+  max_detalles: 30    # fichas que se abren por revisión (solo nuevas que pasan el filtro)
+
 # Feeds RSS de portales del sector. No he encontrado un RSS de ofertas de
 # FashionJobs ni de FashionUnited (solo de noticias), por eso se usan sus
 # alertas por email. Si encuentras uno, añádelo así:
