@@ -1,8 +1,8 @@
 {
  "config": {
   "last_error": "",
-  "last_ok": "2026-11-26T13:01:51.939561+00:00",
-  "last_run": "2026-11-26T13:01:51.939561+00:00",
+  "last_ok": "2026-11-26T14:36:54.102965+00:00",
+  "last_run": "2026-11-26T14:36:54.102965+00:00",
   "meta": {
    "areas": [
     "Trade Marketing",
@@ -75,50 +75,50 @@
     "The Fashion Hub (Moøde)",
     "Santa Eulalia"
    ],
-   "enviadas_ultima": 0,
+   "enviadas_ultima": 1,
    "hash": "7c41b7584a09"
   },
-  "runs": 66,
+  "runs": 67,
   "source": "config"
  },
  "empresa:Almirall": {
   "last_error": "",
-  "last_ok": "2026-11-26T13:01:51.939561+00:00",
-  "last_run": "2026-11-26T13:01:51.939561+00:00",
+  "last_ok": "2026-11-26T14:36:54.102965+00:00",
+  "last_run": "2026-11-26T14:36:54.102965+00:00",
   "meta": {
    "ultimas_ofertas": 0
   },
-  "runs": 64,
+  "runs": 65,
   "source": "empresa:Almirall"
  },
  "empresa:Charlotte Tilbury": {
   "last_error": "",
-  "last_ok": "2026-11-26T13:01:51.939561+00:00",
-  "last_run": "2026-11-26T13:01:51.939561+00:00",
+  "last_ok": "2026-11-26T14:36:54.102965+00:00",
+  "last_run": "2026-11-26T14:36:54.102965+00:00",
   "meta": {
-   "ultimas_ofertas": 206
+   "ultimas_ofertas": 207
   },
-  "runs": 64,
+  "runs": 65,
   "source": "empresa:Charlotte Tilbury"
  },
  "empresa:Cocunat": {
   "last_error": "",
-  "last_ok": "2026-11-26T13:01:51.939561+00:00",
-  "last_run": "2026-11-26T13:01:51.939561+00:00",
+  "last_ok": "2026-11-26T14:36:54.102965+00:00",
+  "last_run": "2026-11-26T14:36:54.102965+00:00",
   "meta": {
    "ultimas_ofertas": 5
   },
-  "runs": 64,
+  "runs": 65,
   "source": "empresa:Cocunat"
  },
  "empresa:Desigual": {
   "last_error": "",
-  "last_ok": "2026-11-26T13:01:51.939561+00:00",
-  "last_run": "2026-11-26T13:01:51.939561+00:00",
+  "last_ok": "2026-11-26T14:36:54.102965+00:00",
+  "last_run": "2026-11-26T14:36:54.102965+00:00",
   "meta": {
    "ultimas_ofertas": 0
   },
-  "runs": 64,
+  "runs": 65,
   "source": "empresa:Desigual"
  },
  "empresa:Inditex (Stradivarius, Bershka, Oysho, Massimo Dutti)": {
@@ -133,171 +133,171 @@
  },
  "empresa:Luxe Talent": {
   "last_error": "",
-  "last_ok": "2026-11-26T13:01:51.939561+00:00",
-  "last_run": "2026-11-26T13:01:51.939561+00:00",
+  "last_ok": "2026-11-26T14:36:54.102965+00:00",
+  "last_run": "2026-11-26T14:36:54.102965+00:00",
   "meta": {
    "ultimas_ofertas": 0
   },
-  "runs": 64,
+  "runs": 65,
   "source": "empresa:Luxe Talent"
  },
  "empresa:Mango": {
   "last_error": "",
-  "last_ok": "2026-11-26T13:01:51.939561+00:00",
-  "last_run": "2026-11-26T13:01:51.939561+00:00",
+  "last_ok": "2026-11-26T14:36:54.102965+00:00",
+  "last_run": "2026-11-26T14:36:54.102965+00:00",
   "meta": {
    "ultimas_ofertas": 0
   },
-  "runs": 64,
+  "runs": 65,
   "source": "empresa:Mango"
  },
  "empresa:Meller": {
   "last_error": "",
-  "last_ok": "2026-11-26T13:01:51.939561+00:00",
-  "last_run": "2026-11-26T13:01:51.939561+00:00",
+  "last_ok": "2026-11-26T14:36:54.102965+00:00",
+  "last_run": "2026-11-26T14:36:54.102965+00:00",
   "meta": {
-   "ultimas_ofertas": 15
+   "ultimas_ofertas": 16
   },
-  "runs": 64,
+  "runs": 65,
   "source": "empresa:Meller"
  },
  "empresa:Mytheresa": {
   "last_error": "",
-  "last_ok": "2026-11-26T13:01:51.939561+00:00",
-  "last_run": "2026-11-26T13:01:51.939561+00:00",
+  "last_ok": "2026-11-26T14:36:54.102965+00:00",
+  "last_run": "2026-11-26T14:36:54.102965+00:00",
   "meta": {
    "ultimas_ofertas": 0
   },
-  "runs": 64,
+  "runs": 65,
   "source": "empresa:Mytheresa"
  },
  "empresa:Newflag": {
   "last_error": "",
-  "last_ok": "2026-11-26T13:01:51.939561+00:00",
-  "last_run": "2026-11-26T13:01:51.939561+00:00",
+  "last_ok": "2026-11-26T14:36:54.102965+00:00",
+  "last_run": "2026-11-26T14:36:54.102965+00:00",
   "meta": {
    "ultimas_ofertas": 17
   },
-  "runs": 64,
+  "runs": 65,
   "source": "empresa:Newflag"
  },
  "empresa:Nude Project": {
   "last_error": "",
-  "last_ok": "2026-11-26T13:01:51.939561+00:00",
-  "last_run": "2026-11-26T13:01:51.939561+00:00",
+  "last_ok": "2026-11-26T14:36:54.102965+00:00",
+  "last_run": "2026-11-26T14:36:54.102965+00:00",
   "meta": {
    "ultimas_ofertas": 10
   },
-  "runs": 64,
+  "runs": 65,
   "source": "empresa:Nude Project"
  },
  "empresa:Olistic": {
   "last_error": "",
-  "last_ok": "2026-11-26T13:01:51.939561+00:00",
-  "last_run": "2026-11-26T13:01:51.939561+00:00",
+  "last_ok": "2026-11-26T14:36:54.102965+00:00",
+  "last_run": "2026-11-26T14:36:54.102965+00:00",
   "meta": {
    "ultimas_ofertas": 0
   },
-  "runs": 64,
+  "runs": 65,
   "source": "empresa:Olistic"
  },
  "empresa:Paloma Wool": {
   "last_error": "",
-  "last_ok": "2026-11-26T13:01:51.939561+00:00",
-  "last_run": "2026-11-26T13:01:51.939561+00:00",
+  "last_ok": "2026-11-26T14:36:54.102965+00:00",
+  "last_run": "2026-11-26T14:36:54.102965+00:00",
   "meta": {
    "ultimas_ofertas": 1
   },
-  "runs": 64,
+  "runs": 65,
   "source": "empresa:Paloma Wool"
  },
  "empresa:Pronovias": {
   "last_error": "",
-  "last_ok": "2026-11-26T13:01:51.939561+00:00",
-  "last_run": "2026-11-26T13:01:51.939561+00:00",
+  "last_ok": "2026-11-26T14:36:54.102965+00:00",
+  "last_run": "2026-11-26T14:36:54.102965+00:00",
   "meta": {
    "ultimas_ofertas": 23
   },
-  "runs": 64,
+  "runs": 65,
   "source": "empresa:Pronovias"
  },
  "empresa:Puig": {
   "last_error": "",
-  "last_ok": "2026-11-26T13:01:51.939561+00:00",
-  "last_run": "2026-11-26T13:01:51.939561+00:00",
+  "last_ok": "2026-11-26T14:36:54.102965+00:00",
+  "last_run": "2026-11-26T14:36:54.102965+00:00",
   "meta": {
    "ultimas_ofertas": 43
   },
-  "runs": 64,
+  "runs": 65,
   "source": "empresa:Puig"
  },
  "empresa:Revlon (oficina de Cornellà)": {
   "last_error": "",
-  "last_ok": "2026-11-26T13:01:51.939561+00:00",
-  "last_run": "2026-11-26T13:01:51.939561+00:00",
+  "last_ok": "2026-11-26T14:36:54.102965+00:00",
+  "last_run": "2026-11-26T14:36:54.102965+00:00",
   "meta": {
    "ultimas_ofertas": 79
   },
-  "runs": 64,
+  "runs": 65,
   "source": "empresa:Revlon (oficina de Cornellà)"
  },
  "empresa:Thomas Sabo (oficina Iberia)": {
   "last_error": "",
-  "last_ok": "2026-11-26T13:01:51.939561+00:00",
-  "last_run": "2026-11-26T13:01:51.939561+00:00",
+  "last_ok": "2026-11-26T14:36:54.102965+00:00",
+  "last_run": "2026-11-26T14:36:54.102965+00:00",
   "meta": {
    "ultimas_ofertas": 37
   },
-  "runs": 64,
+  "runs": 65,
   "source": "empresa:Thomas Sabo (oficina Iberia)"
  },
  "empresa:Veepee": {
   "last_error": "",
-  "last_ok": "2026-11-26T13:01:51.939561+00:00",
-  "last_run": "2026-11-26T13:01:51.939561+00:00",
+  "last_ok": "2026-11-26T14:36:54.102965+00:00",
+  "last_run": "2026-11-26T14:36:54.102965+00:00",
   "meta": {
    "ultimas_ofertas": 81
   },
-  "runs": 64,
+  "runs": 65,
   "source": "empresa:Veepee"
  },
  "empresas": {
   "last_error": "",
-  "last_ok": "2026-11-26T13:01:51.939561+00:00",
-  "last_run": "2026-11-26T13:01:51.939561+00:00",
+  "last_ok": "2026-11-26T14:36:54.102965+00:00",
+  "last_run": "2026-11-26T14:36:54.102965+00:00",
   "meta": {
-   "ultimas_ofertas": 517
+   "ultimas_ofertas": 519
   },
-  "runs": 64,
+  "runs": 65,
   "source": "empresas"
  },
  "fashionjobs": {
   "last_error": "",
-  "last_ok": "2026-11-26T13:01:51.939561+00:00",
-  "last_run": "2026-11-26T13:01:51.939561+00:00",
+  "last_ok": "2026-11-26T14:36:54.102965+00:00",
+  "last_run": "2026-11-26T14:36:54.102965+00:00",
   "meta": {
    "ultimas_ofertas": 120
   },
-  "runs": 45,
+  "runs": 46,
   "source": "fashionjobs"
  },
  "gmail": {
   "last_error": "error: b'[ALERT] Invalid credentials (Failure)'",
   "last_ok": "2026-11-24T09:01:34.593651+00:00",
-  "last_run": "2026-11-26T13:01:51.939561+00:00",
+  "last_run": "2026-11-26T14:36:54.102965+00:00",
   "meta": {
    "por_portal": {},
    "ultimas_ofertas": 0
   },
-  "runs": 46,
+  "runs": 47,
   "source": "gmail"
  },
  "limpieza": {
   "last_error": "",
-  "last_ok": "2026-11-25T14:13:03.203178+00:00",
-  "last_run": "2026-11-25T14:13:03.203178+00:00",
+  "last_ok": "2026-11-26T14:36:54.102965+00:00",
+  "last_run": "2026-11-26T14:36:54.102965+00:00",
   "meta": {},
-  "runs": 3,
+  "runs": 4,
   "source": "limpieza"
  },
  "telegram": {
