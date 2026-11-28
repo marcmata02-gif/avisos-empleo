@@ -1,7 +1,7 @@
 {
  "config": {
   "last_error": "",
-  "last_run": "2026-11-28T08:44:06.889774+00:00",
+  "last_run": "2026-11-28T09:44:36.552727+00:00",
   "meta": {
    "areas": [
     "Trade Marketing",
@@ -80,28 +80,28 @@
  },
  "empresa:Almirall": {
   "last_error": "",
-  "last_run": "2026-11-28T08:44:06.889774+00:00",
+  "last_run": "2026-11-28T09:44:36.552727+00:00",
   "meta": {
    "ultimas_ofertas": 0
   }
  },
  "empresa:Charlotte Tilbury": {
   "last_error": "",
-  "last_run": "2026-11-28T08:44:06.889774+00:00",
+  "last_run": "2026-11-28T09:44:36.552727+00:00",
   "meta": {
    "ultimas_ofertas": 206
   }
  },
  "empresa:Cocunat": {
   "last_error": "",
-  "last_run": "2026-11-28T08:44:06.889774+00:00",
+  "last_run": "2026-11-28T09:44:36.552727+00:00",
   "meta": {
    "ultimas_ofertas": 5
   }
  },
  "empresa:Desigual": {
   "last_error": "",
-  "last_run": "2026-11-28T08:44:06.889774+00:00",
+  "last_run": "2026-11-28T09:44:36.552727+00:00",
   "meta": {
    "ultimas_ofertas": 0
   }
@@ -115,112 +115,112 @@
  },
  "empresa:Luxe Talent": {
   "last_error": "",
-  "last_run": "2026-11-28T08:44:06.889774+00:00",
+  "last_run": "2026-11-28T09:44:36.552727+00:00",
   "meta": {
    "ultimas_ofertas": 0
   }
  },
  "empresa:Mango": {
-  "last_error": "",
-  "last_run": "2026-11-28T08:44:06.889774+00:00",
+  "last_error": "HTTPError: 403 Client Error: Forbidden for url: https://jobs.mango.com/es/",
+  "last_run": "2026-11-28T09:44:36.552727+00:00",
   "meta": {
    "ultimas_ofertas": 0
   }
  },
  "empresa:Meller": {
   "last_error": "",
-  "last_run": "2026-11-28T08:44:06.889774+00:00",
+  "last_run": "2026-11-28T09:44:36.552727+00:00",
   "meta": {
    "ultimas_ofertas": 17
   }
  },
  "empresa:Mytheresa": {
   "last_error": "",
-  "last_run": "2026-11-28T08:44:06.889774+00:00",
+  "last_run": "2026-11-28T09:44:36.552727+00:00",
   "meta": {
    "ultimas_ofertas": 0
   }
  },
  "empresa:Newflag": {
   "last_error": "",
-  "last_run": "2026-11-28T08:44:06.889774+00:00",
+  "last_run": "2026-11-28T09:44:36.552727+00:00",
   "meta": {
    "ultimas_ofertas": 16
   }
  },
  "empresa:Nude Project": {
   "last_error": "",
-  "last_run": "2026-11-28T08:44:06.889774+00:00",
+  "last_run": "2026-11-28T09:44:36.552727+00:00",
   "meta": {
    "ultimas_ofertas": 9
   }
  },
  "empresa:Olistic": {
   "last_error": "",
-  "last_run": "2026-11-28T08:44:06.889774+00:00",
+  "last_run": "2026-11-28T09:44:36.552727+00:00",
   "meta": {
    "ultimas_ofertas": 0
   }
  },
  "empresa:Paloma Wool": {
   "last_error": "",
-  "last_run": "2026-11-28T08:44:06.889774+00:00",
+  "last_run": "2026-11-28T09:44:36.552727+00:00",
   "meta": {
    "ultimas_ofertas": 1
   }
  },
  "empresa:Pronovias": {
   "last_error": "",
-  "last_run": "2026-11-28T08:44:06.889774+00:00",
+  "last_run": "2026-11-28T09:44:36.552727+00:00",
   "meta": {
    "ultimas_ofertas": 24
   }
  },
  "empresa:Puig": {
   "last_error": "",
-  "last_run": "2026-11-28T08:44:06.889774+00:00",
+  "last_run": "2026-11-28T09:44:36.552727+00:00",
   "meta": {
    "ultimas_ofertas": 43
   }
  },
  "empresa:Revlon (oficina de Cornellà)": {
   "last_error": "",
-  "last_run": "2026-11-28T08:44:06.889774+00:00",
+  "last_run": "2026-11-28T09:44:36.552727+00:00",
   "meta": {
    "ultimas_ofertas": 79
   }
  },
  "empresa:Thomas Sabo (oficina Iberia)": {
   "last_error": "",
-  "last_run": "2026-11-28T08:44:06.889774+00:00",
+  "last_run": "2026-11-28T09:44:36.552727+00:00",
   "meta": {
    "ultimas_ofertas": 37
   }
  },
  "empresa:Veepee": {
   "last_error": "",
-  "last_run": "2026-11-28T08:44:06.889774+00:00",
+  "last_run": "2026-11-28T09:44:36.552727+00:00",
   "meta": {
    "ultimas_ofertas": 77
   }
  },
  "empresas": {
   "last_error": "",
-  "last_run": "2026-11-28T08:44:06.889774+00:00",
+  "last_run": "2026-11-28T09:44:36.552727+00:00",
   "meta": {
    "ultimas_ofertas": 514
   }
  },
  "fashionjobs": {
   "last_error": "",
-  "last_run": "2026-11-28T08:44:06.889774+00:00",
+  "last_run": "2026-11-28T09:44:36.552727+00:00",
   "meta": {
    "ultimas_ofertas": 118
   }
  },
  "gmail": {
   "last_error": "error: b'[ALERT] Invalid credentials (Failure)'",
-  "last_run": "2026-11-28T08:44:06.889774+00:00",
+  "last_run": "2026-11-28T09:44:36.552727+00:00",
   "meta": {
    "por_portal": {},
    "ultimas_ofertas": 0
